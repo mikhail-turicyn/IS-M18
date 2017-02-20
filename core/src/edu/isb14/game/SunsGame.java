@@ -22,6 +22,7 @@ public class SunsGame extends ApplicationAdapter {
 	OrthographicCamera camera1;
 	Texture img;
 	// hi
+	// херня два
 	private Viewport viewport;
 	private Camera camera;
 
