@@ -3,13 +3,18 @@ package edu.isb14.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-abstract class AnimationGame {
+public class AnimationGame {
+    private TextureRegion currentFrame;
+    private float stateTimeExplosion = 0;
+    private  Animation animation;
+    private boolean loop;
 
-    AnimationGame(){}
+    AnimationGame(String strTex, int frame_rows, int frame_cols, float time, boolean loop){
+        this.loop = loop;
 
-    static TextureRegion[] getFrames(String strTex, int frame_rows, int frame_cols){
         Texture texture;
         texture = new Texture(Gdx.files.internal(strTex));	// Загрузка сета текстур
         TextureRegion[] frames = new TextureRegion[frame_rows*frame_cols];	// Массив фреймов
@@ -23,52 +28,31 @@ abstract class AnimationGame {
             for (int j = 0; j < frame_cols; j++)
                 frames[index++] = tmp[i][j];
 
-        return frames;
+        animation = new Animation(time,frames);
     }
+
+    public void render(SpriteBatch batch){
+
+        if (animation.isAnimationFinished(stateTimeExplosion) == false || loop == true ){
+            stateTimeExplosion += Gdx.graphics.getDeltaTime(); //  Добавляет время в stateTimeExplosion, прошедшее с момента последней визуализации.
+            currentFrame = animation.getKeyFrame(stateTimeExplosion, loop);	// Возвращает послений фрейм, для отрисовки
+            batch.draw(currentFrame, 200, 200);
+        }
+
+    }
+
 }
 
 /*  MANUAL
 Класс для более простой работы с анимацией
-Выглядит так:
-AnimationGame.getFrames("строка_адресс_текстуры",FRAME_ROWS,FRAME_COLS);
+Выглядит так: AnimationGame("sprite-animation4.png", FRAME_ROWS, FRAME_COLS, 0.02f, false);
 
 AnimationGame - имя класса
 getFrames - имя статического метода(статический, для того, чтобы не создавать объект класса
 1 параметр - имя текстуры ( здесь текстура это набор картинок (кадры) для анимации
 2 параметр - кол-во строк в этой текстуре
 3 параметр - кол-во стобцов в этой текстуре
-Возвращаемое значение - массив фреймов, которые можно сразу использовать для отрисовки анимации с помощью класса libGDX - Animation
-
---ПРИМЕР
-public class SunsGame extends ApplicationAdapter {
-    ----
-    public static final int FRAME_ROWS = 3;
-	public static final int FRAME_COLS = 3;
-
-	Animation explosionAnimation;
-	TextureRegion[] explosionFrames;
-	TextureRegion currentFrameExplosion;
-	float stateTimeExplosion = 0;
-
-
-public void create ()
-    ------------
-    explosionFrames = AnimationGame.getFrames("boom.png",FRAME_ROWS,FRAME_COLS);
-	explosionAnimation = new Animation(0.1f,explosionFrames);
-	stateTimeExplosion = 0;
-	------
-
-public void render () {
-		update();
-    ------
-		batch.begin();
-		batch.draw(currentFrameExplosion, 200, 200);
-		batch.end();
-	}
-
-	public void update(){
-		stateTimeExplosion += Gdx.graphics.getDeltaTime(); //  Добавляет время в stateTimeExplosion, прошедшее с момента последней визуализации.
-		currentFrameExplosion = explosionAnimation.getKeyFrame(stateTimeExplosion, true);	// Возвращает послений фрейм, для отрисовки
-	}
+4 параметр - время отрисовки одного спрайта
+5 параметр - loop - повторяющаяся анимация или нет
 
  */

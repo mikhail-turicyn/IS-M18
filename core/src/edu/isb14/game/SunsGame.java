@@ -25,10 +25,7 @@ public class SunsGame extends ApplicationAdapter {
 	private Viewport viewport;
 	private Camera camera;
 	// Анимация человечка
-	private Animation explosionAnimation;
-	private TextureRegion[] explosionFrames;
-	private TextureRegion currentFrameExplosion;
-	private float stateTimeExplosion = 0;
+	private AnimationGame walkAnimation;
 	// ---
 	@Override
 	public void create () {
@@ -40,9 +37,7 @@ public class SunsGame extends ApplicationAdapter {
 		camera = new PerspectiveCamera();
 		viewport = new FitViewport(CONFIG_WIDTH, CONFIG_HEIGHT, camera);
 
-		explosionFrames = AnimationGame.getFrames("sprite-animation4.png",FRAME_ROWS,FRAME_COLS);
-		explosionAnimation = new Animation(0.02f,explosionFrames);
-		stateTimeExplosion = 0;
+		walkAnimation = new AnimationGame("sprite-animation4.png", FRAME_ROWS, FRAME_COLS, 0.02f, false);
 
 	}
 
@@ -54,8 +49,8 @@ public class SunsGame extends ApplicationAdapter {
 
 		batch.begin();
 		background.render(batch);	// Отрисовка фона
-
-		batch.draw(currentFrameExplosion, 200, 200);
+		walkAnimation.render(batch);	// Отрисовка бегущего человечка
+//		batch.draw(currentFrameExplosion, 200, 200);
 		batch.end();
 	}
 
@@ -64,8 +59,8 @@ public class SunsGame extends ApplicationAdapter {
 	}
 
 	private void update(){
-		stateTimeExplosion += Gdx.graphics.getDeltaTime(); //  Добавляет время в stateTimeExplosion, прошедшее с момента последней визуализации.
-		currentFrameExplosion = explosionAnimation.getKeyFrame(stateTimeExplosion, true);	// Возвращает послений фрейм, для отрисовки
+//		stateTimeExplosion += Gdx.graphics.getDeltaTime(); //  Добавляет время в stateTimeExplosion, прошедшее с момента последней визуализации.
+//		currentFrameExplosion = explosionAnimation.getKeyFrame(stateTimeExplosion, true);	// Возвращает послений фрейм, для отрисовки
 	}
 	
 	@Override
