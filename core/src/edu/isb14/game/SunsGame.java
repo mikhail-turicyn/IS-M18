@@ -21,7 +21,7 @@ public class SunsGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	OrthographicCamera camera1;
 	Texture img;
-
+	// hi
 	private Viewport viewport;
 	private Camera camera;
 
