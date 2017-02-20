@@ -18,50 +18,27 @@ public class SunsGame extends ApplicationAdapter {
 	public static final int FRAME_ROWS = 5;
 	public static final int FRAME_COLS = 6;
 
-	SpriteBatch batch;
+	private SpriteBatch batch;
 	OrthographicCamera camera1;
-	Texture img;
-	// hi
-	// херня два
+	private Background background;
+	// Настройка отображения под разными экранами
 	private Viewport viewport;
 	private Camera camera;
-
-	Animation explosionAnimation;
-	TextureRegion[] explosionFrames;
-	TextureRegion currentFrameExplosion;
-	float stateTimeExplosion = 0;
-
-//	ImageButton button;
-//	ImageButton.ImageButtonStyle buttonStyle;
-
-//	public void show()
-//	{
-//		//назначаете позицию, размер, стиль вышеперечисленных кнопки и стиля
-//
-//		TextureAtlas mainMenuAtlas = Assets.manager.get("mainmenu/mainMenu.atlas", TextureAtlas.class);//если есть менеджер ассетов - загрузите ваш атлас с изображениями
-//		Skin buttonsSkin = new Skin(mainMenuAtlas);
-//
-//		ImageButton.ImageButtonStyle connectToHost = new ImageButton.ImageButtonStyle();
-//		connectToHost.up = buttonsSkin.getDrawable("menu-connect-btn");//кнопка не нажата
-//		connectToHost.over = buttonsSkin.getDrawable("menu-connect-btn");
-//		connectToHost.down = buttonsSkin.getDrawable("menu-connect-btn-down"); // кнопка нажата
-//
-//		ImageButton gameClientButton = new ImageButton(connectToHost);
-//		gameClientButton.setSize(100, 200);// размер кнопки
-//		gameClientButton.setPosition(10, 10); // позиция кнопки(с нижнего левого угла координаты считаются)
-////		gameClientButton.addListener(new ClientListener()); //действие при нажатии
-//		stage.addActor(gameClientButton ); //добавляем кнопку к сцене
-//	}
-//
+	// Анимация человечка
+	private Animation explosionAnimation;
+	private TextureRegion[] explosionFrames;
+	private TextureRegion currentFrameExplosion;
+	private float stateTimeExplosion = 0;
+	// ---
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera();
 //		camera1.setToOrtho(false, 800, 480);
-		img = new Texture(Gdx.files.internal("back.png"));
+		background = new Background("back.png");
 
 		camera = new PerspectiveCamera();
-		viewport = new FitViewport(1920, 1080, camera);
+		viewport = new FitViewport(CONFIG_WIDTH, CONFIG_HEIGHT, camera);
 
 		explosionFrames = AnimationGame.getFrames("sprite-animation4.png",FRAME_ROWS,FRAME_COLS);
 		explosionAnimation = new Animation(0.02f,explosionFrames);
@@ -76,7 +53,7 @@ public class SunsGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);	// Очищает экран при каждом кадре.
 
 		batch.begin();
-		batch.draw(img, 0, 0, CONFIG_WIDTH, CONFIG_HEIGHT);
+		background.render(batch);	// Отрисовка фона
 
 		batch.draw(currentFrameExplosion, 200, 200);
 		batch.end();
@@ -86,7 +63,7 @@ public class SunsGame extends ApplicationAdapter {
 		viewport.update(width, height);
 	}
 
-	public void update(){
+	private void update(){
 		stateTimeExplosion += Gdx.graphics.getDeltaTime(); //  Добавляет время в stateTimeExplosion, прошедшее с момента последней визуализации.
 		currentFrameExplosion = explosionAnimation.getKeyFrame(stateTimeExplosion, true);	// Возвращает послений фрейм, для отрисовки
 	}

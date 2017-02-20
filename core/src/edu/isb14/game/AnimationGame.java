@@ -5,14 +5,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public abstract class AnimationGame {
-
+abstract class AnimationGame {
 
     AnimationGame(){}
 
-    static final TextureRegion[] getFrames(String strtex, int frame_rows, int frame_cols){
+    static TextureRegion[] getFrames(String strTex, int frame_rows, int frame_cols){
         Texture texture;
-        texture = new Texture(Gdx.files.internal(strtex));	// Загрузка сета текстур
+        texture = new Texture(Gdx.files.internal(strTex));	// Загрузка сета текстур
         TextureRegion[] frames = new TextureRegion[frame_rows*frame_cols];	// Массив фреймов
 
         // TextureRegion.split - разбивает текстуру на фреймы в двумерный массив
