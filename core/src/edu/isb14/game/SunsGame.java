@@ -15,8 +15,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class SunsGame extends ApplicationAdapter {
 	public static final int CONFIG_WIDTH = 1280;
 	public static final int CONFIG_HEIGHT = 720;
-	public static final int FRAME_ROWS = 5;
-	public static final int FRAME_COLS = 6;
 
 	private SpriteBatch batch;
 	OrthographicCamera camera1;
@@ -27,6 +25,10 @@ public class SunsGame extends ApplicationAdapter {
 	// Анимация человечка
 	private AnimationGame walkAnimation;
 	// ---
+
+	private Hero player1;
+	private Hero player2;
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -37,7 +39,9 @@ public class SunsGame extends ApplicationAdapter {
 		camera = new PerspectiveCamera();
 		viewport = new FitViewport(CONFIG_WIDTH, CONFIG_HEIGHT, camera);
 
-		walkAnimation = new AnimationGame("sprite-animation4.png", FRAME_ROWS, FRAME_COLS, 0.02f, false);
+		walkAnimation = new AnimationGame("sprite-animation4.png", 5, 6, 0.02f, false);
+		player1 = new Hero(Hero.Player.P1);
+		player2 = new Hero(Hero.Player.P2);
 
 	}
 
@@ -48,9 +52,12 @@ public class SunsGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);	// Очищает экран при каждом кадре.
 
 		batch.begin();
+
 		background.render(batch);	// Отрисовка фона
 		walkAnimation.render(batch);	// Отрисовка бегущего человечка
-//		batch.draw(currentFrameExplosion, 200, 200);
+		player1.render(batch);		// Отрисовка игрока
+		player2.render(batch);		// Отрисовка игрока
+
 		batch.end();
 	}
 
@@ -59,8 +66,7 @@ public class SunsGame extends ApplicationAdapter {
 	}
 
 	private void update(){
-//		stateTimeExplosion += Gdx.graphics.getDeltaTime(); //  Добавляет время в stateTimeExplosion, прошедшее с момента последней визуализации.
-//		currentFrameExplosion = explosionAnimation.getKeyFrame(stateTimeExplosion, true);	// Возвращает послений фрейм, для отрисовки
+
 	}
 	
 	@Override
