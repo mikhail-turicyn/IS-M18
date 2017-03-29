@@ -22,7 +22,7 @@ public class Hero {
     public enum Player { P1, P2 }
 
     // control
-    private int left, right, up, down, attak;
+    private int left, right, up, down, fire;
 
     public Hero(Player player){
 
@@ -42,14 +42,14 @@ public class Hero {
             right = Input.Keys.D;
             up = Input.Keys.W;
             down = Input.Keys.S;
-            attack = Input.Keys.SPACE;
+            fire = Input.Keys.SPACE;
         } else {
             texture = new Texture(Gdx.files.internal("ship2_60x60.png"));
             left = Input.Keys.LEFT;
             right = Input.Keys.RIGHT;
             up = Input.Keys.UP;
             down = Input.Keys.DOWN;
-            attack = Input.Keys.NUMPAD_3;
+            fire = Input.Keys.NUMPAD_3;
         }
     }
 
@@ -63,7 +63,7 @@ public class Hero {
     public void update(){
 
 // логика стельбы
-        if (Gdx.input.isKeyPressed(attack)){                        // при нажатии пробел
+        if (Gdx.input.isKeyPressed(fire)){                        // при нажатии пробел
             fireCounter++;                                                  // мы увеличиваем какой-то счетчик
             if (fireCounter > fireRate){                                     // если этот счётчик стал больше чем
                 fireCounter = 0;                                            // счётчик сбрасываем
@@ -78,7 +78,7 @@ public class Hero {
 // CONTROL
 
 
-        if (Gdx.input.isKeyPressed(up)){
+        if (Gdx.input.isKeyPressed(up) && !Gdx.input.isKeyPressed(down)){
             position.y += speed;
 //            rect.y = position.y;
             // ограничение ВЕРХ
@@ -86,7 +86,7 @@ public class Hero {
                 position.y = SunsGame.CONFIG_HEIGHT - texture.getHeight();
             }
         }
-        if (Gdx.input.isKeyPressed(down)){
+        if (Gdx.input.isKeyPressed(down) && !Gdx.input.isKeyPressed(up)){
             position.y -= speed;
 //            rect.y = position.y;
             // ограничение НИЗ
@@ -94,7 +94,7 @@ public class Hero {
                 position.y = 25;
             }
         }
-        if (Gdx.input.isKeyPressed(right)){
+        if (Gdx.input.isKeyPressed(right) && !Gdx.input.isKeyPressed(left)){
             position.x += speed;
 //            rect.x = position.x;
             // ограничение ПРАВО
@@ -102,7 +102,7 @@ public class Hero {
                 position.x = SunsGame.CONFIG_WIDTH - texture.getWidth();
             }
         }
-        if (Gdx.input.isKeyPressed(left)){
+        if (Gdx.input.isKeyPressed(left) && !Gdx.input.isKeyPressed(right)){
             position.x -= speed;
 //            rect.x = position.x;
             // ограничение ЛЕВО
