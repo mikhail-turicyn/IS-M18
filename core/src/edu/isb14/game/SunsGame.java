@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class SunsGame extends ApplicationAdapter {
 	public static final int CONFIG_WIDTH = 1280;
 	public static final int CONFIG_HEIGHT = 720;
+	// ТАК ДЕЛАТЬ НЕЛЬЗЯ!!!!!!!!!!!!!!!!
 
 	private SpriteBatch batch;
 	OrthographicCamera camera1;
