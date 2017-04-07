@@ -27,7 +27,7 @@ public class SunsGame extends ApplicationAdapter {
 	private AnimationGame walkAnimation;
 	// ---
 
-	private Hero player1;
+	private Hero player2;
 	private Hero player2;
 
 	@Override
