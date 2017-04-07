@@ -35,7 +35,7 @@ public class Hero {
 //        state.setPosition(0,(float)SunsGame.CONFIG_HEIGHT / 2);
 //        state.setSpeed(10.0f);
 //        state.setFireRate(5);
-
+    // УПРАВЛЕНИЕ
         if ( player == Hero.Player.P1 ) {
             texture = new Texture(Gdx.files.internal("ship1_80x52.png"));
             left = Input.Keys.A;
@@ -67,7 +67,7 @@ public class Hero {
             fireCounter++;                                                  // мы увеличиваем какой-то счетчик
             if (fireCounter > fireRate){                                     // если этот счётчик стал больше чем
                 fireCounter = 0;                                            // счётчик сбрасываем
-                for (int i = 0; i < bulletEmitter.bullets.length; i++) {        // начинаем ходить по массиву пуль, котор лежит в MyGdxGame
+                for (int i = 0; i < bulletEmitter.bullets.length; i++) {        // начинаем ходить по массиву пуль, котор лежит в BulletEmitter
                     if(!bulletEmitter.bullets[i].isActive()){                    // как только находим в этом массиве не активную пулю,
                         bulletEmitter.bullets[i].setup(position.x + 55,position.y + 16);  // мы её создаём
                         break;                                              // и перестаем искать ещё какие то пули
