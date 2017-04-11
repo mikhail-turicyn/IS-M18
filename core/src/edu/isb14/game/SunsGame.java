@@ -35,7 +35,9 @@ public class SunsGame extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera();
 //		camera1.setToOrtho(false, 800, 480);
-		background = new Background("back.png");
+		if (true) {
+			background = new Background("back.png");
+		}
 
 		//camera = new PerspectiveCamera();
 		viewport = new FitViewport(CONFIG_WIDTH, CONFIG_HEIGHT, camera);
