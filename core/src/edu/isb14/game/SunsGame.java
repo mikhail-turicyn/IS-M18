@@ -27,7 +27,7 @@ public class SunsGame extends ApplicationAdapter {
 	private AnimationGame walkAnimation;
 	// ---
 
-	private Hero player2;
+	private Hero player1;
 	private Hero player2;
 
 	@Override
@@ -37,7 +37,7 @@ public class SunsGame extends ApplicationAdapter {
 //		camera1.setToOrtho(false, 800, 480);
 		background = new Background("back.png");
 
-		camera = new PerspectiveCamera();
+		//camera = new PerspectiveCamera();
 		viewport = new FitViewport(CONFIG_WIDTH, CONFIG_HEIGHT, camera);
 
 		walkAnimation = new AnimationGame("sprite-animation4.png", 5, 6, 0.02f, false);
