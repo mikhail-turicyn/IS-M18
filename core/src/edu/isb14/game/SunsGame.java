@@ -35,14 +35,10 @@ public class SunsGame extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera();
 //		camera1.setToOrtho(false, 800, 480);
-
-		
-			background = new Background("back.png");
+		background = new Background("back.png");
 
 		//camera = new PerspectiveCamera();
-		viewport = new FitViewport(CONFIG_WIDTH, CONFIG_HEIGHT, camera);
 
-		walkAnimation = new AnimationGame("sprite-animation4.png", 5, 6, 0.02f, false);
 		player1 = new Hero(Hero.Player.P1);
 		player2 = new Hero(Hero.Player.P2);
 
