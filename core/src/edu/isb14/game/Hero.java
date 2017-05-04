@@ -30,11 +30,6 @@ public class Hero {
 
         position = new Vector2(0,(float)SunsGame.CONFIG_HEIGHT / 2);
 
-//        state.setHp(100);
-//        state.setAttack(20);
-//        state.setPosition(0,(float)SunsGame.CONFIG_HEIGHT / 2);
-//        state.setSpeed(10.0f);
-//        state.setFireRate(5);
     // УПРАВЛЕНИЕ
         if ( player == Hero.Player.P1 ) {
             texture = new Texture(Gdx.files.internal("ship1_80x52.png"));
@@ -55,7 +50,6 @@ public class Hero {
 
     public void render(SpriteBatch batch){
         update();
-//        batch.draw(texture, state.getPosition().x, state.getPosition().y);
         batch.draw(texture, position.x, position.y);
         bulletEmitter.renderLinerShot(batch);
     }
@@ -67,7 +61,7 @@ public class Hero {
             fireCounter++;                                                  // мы увеличиваем какой-то счетчик
             if (fireCounter > fireRate){                                     // если этот счётчик стал больше чем
                 fireCounter = 0;                                            // счётчик сбрасываем
-                for (int i = 0; i < bulletEmitter.bullets.length; i++) {        // начинаем ходить по массиву пуль, котор лежит в BulletEmitter
+                for (int i = 0; i < bulletEmitter.bullets.length; i++) {        // начинаем ходить по массиву пуль
                     if(!bulletEmitter.bullets[i].isActive()){                    // как только находим в этом массиве не активную пулю,
                         bulletEmitter.bullets[i].setup(position.x + 55,position.y + 16);  // мы её создаём
                         break;                                              // и перестаем искать ещё какие то пули
@@ -121,6 +115,18 @@ public class Hero {
 //        rect.x = position.x;
 //        rect.y = position.y;
 
+    }
+
+    public int getAttack(){
+        return attack;
+    }
+
+    public int getHp(){
+        return hp;
+    }
+
+    public int getScore(){
+        return score;
     }
 }
 
