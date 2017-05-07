@@ -10,8 +10,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -31,7 +29,7 @@ public class MediumEnemy extends Enemy{
         this.fireRate = 25;
         
         this.texture = new Texture(Gdx.files.internal(sprite));
-        this.position = new Vector2(SunsGame.CONFIG_WIDTH, (float) (Math.random()*SunsGame.CONFIG_HEIGHT - texture.getHeight()));
+        this.position = new Vector2(SunsGame.CONFIG_WIDTH, (float) (Math.random()* SunsGame.CONFIG_HEIGHT - texture.getHeight()));
         this.hitBox = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
         
     }

@@ -28,7 +28,7 @@ public class Hero {
 
         this.player = player;
 
-        position = new Vector2(0,(float)SunsGame.CONFIG_HEIGHT / 2);
+        position = new Vector2(0,(float) SunsGame.CONFIG_HEIGHT / 2);
 
     // УПРАВЛЕНИЕ
         if ( player == Hero.Player.P1 ) {
