@@ -29,8 +29,9 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 	// Игроки
 	private Hero player1;
 	private Hero player2;
+	boolean onePlayers;
 
-	public GameScreen (final SunsGame gam) {		// используем конструткор вместо метода create при работе с экранами
+	public GameScreen (final SunsGame gam, boolean amountPlayer) {		// используем конструткор вместо метода create при работе с экранами
 		this.game = gam;
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera();
@@ -43,8 +44,16 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 
 		walkAnimation = new AnimationGame("sprite-animation4.png", 5, 6, 0.02f, false);
 
-		player1 = new Hero(Hero.Player.P1);
-		player2 = new Hero(Hero.Player.P2);
+		onePlayers = amountPlayer;
+		if (onePlayers == true ){
+			player1 = new Hero(Hero.Player.P1);
+		} else {
+			player1 = new Hero(Hero.Player.P1);
+			player2 = new Hero(Hero.Player.P2);
+
+			player1.setPosition(30, SunsGame.CONFIG_HEIGHT/2 + 100);
+			player2.setPosition(30, SunsGame.CONFIG_HEIGHT/2 - 100);
+		}
 
 	}
 
@@ -58,8 +67,12 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 
 		background.render(game.batch);	// Отрисовка фона
 		//walkAnimation.render(batch);	// Отрисовка бегущего человечка
+
 		player1.render(game.batch);		// Отрисовка игрока
-		player2.render(game.batch);		// Отрисовка игрока
+		if (onePlayers == false){
+			player2.render(game.batch);		// Отрисовка игрока}
+		}
+
                 if (badGuy.isActive()){
                     badGuy.render(game.batch);
                     badGuy.bulletRender(game.batch);

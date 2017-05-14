@@ -170,13 +170,15 @@ public class MainMenuScreen implements Screen {
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+            // One Player
             if (currentItem == 0) {
-                game.setScreen(new GameScreen(game));
+                game.setScreen(new GameScreen(game, true));
                 dispose();
             }
-
+            // Two Players
             if (currentItem == 1) {
-                Gdx.app.exit();
+                game.setScreen(new GameScreen(game, false));
+                dispose();
             }
 
             if (currentItem == 2) {
