@@ -143,33 +143,19 @@ public class MainMenuScreen implements Screen {
 
     public void handleInput(float delta) {
 
-        if (Gdx.input.isKeyPressed(Input.Keys.NUM_1)) {
-//            if (currentItem > 0){
-//                currentItem--;
-//            }
-            currentItem = 0;
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+            if (currentItem > 0){
+                currentItem--;
+            }
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.NUM_2)) {
-//            if (currentItem < menuItems.length -1){
-//                currentItem++;
-//            }
-            currentItem = 1;
+        if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
+            if (currentItem < menuItems.length -1){
+                currentItem++;
+            }
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.NUM_3)) {
-            currentItem = 2;
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.NUM_4)) {
-            currentItem = 3;
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.NUM_5)) {
-            currentItem = 4;
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             // One Player
             if (currentItem == 0) {
                 game.setScreen(new GameScreen(game, true));
@@ -180,14 +166,15 @@ public class MainMenuScreen implements Screen {
                 game.setScreen(new GameScreen(game, false));
                 dispose();
             }
-
+            // Highscores
             if (currentItem == 2) {
-                Gdx.app.exit();
+                game.setScreen(new HighscoresScreen(game));
             }
-
+            // Configurations
             if (currentItem == 3) {
                 //gsm.setState(GameStateManager.HIGHSCORES);
             }
+            // Quit
             if (currentItem == 4) {
                 Gdx.app.exit();
             }
