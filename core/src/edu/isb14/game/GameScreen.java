@@ -2,12 +2,10 @@ package edu.isb14.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -16,7 +14,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class GameScreen extends ApplicationAdapter implements Screen{
 
 	final SunsGame game;
-	private SpriteBatch batch;
+
 	OrthographicCamera camera1;
 	private Background background;
 	// Настройка отображения под разными экранами
@@ -31,9 +29,13 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 	private Hero player2;
 	boolean onePlayers;
 
+	private BitmapFont pauseMenu;
+	private String pauseMenuItems[];
+	private int currentPauseItem;
+
 	public GameScreen (final SunsGame gam, boolean amountPlayer) {		// используем конструткор вместо метода create при работе с экранами
 		this.game = gam;
-		batch = new SpriteBatch();
+
 		camera = new OrthographicCamera();
 		background = new Background("back.png");
                 badGuy = new MediumEnemy("enemy.png");
@@ -55,14 +57,92 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 			player2.setPosition(30, SunsGame.CONFIG_HEIGHT/2 - 100);
 		}
 
+		pauseMenu = new BitmapFont();
+		pauseMenuItems = new String[]{
+				"Continue",
+				"Back to menu",
+				"Quit"
+		};
+		currentPauseItem = 0;
 	}
 
 	@Override
 	public void render (float delta) {
-		update();
-		Gdx.gl.glClearColor(0, 0, 0, 1);	// Цвет фона
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);	// Очищает экран при каждом кадре.
 
+		switch(game.state){
+			case Running:
+				draw();
+				if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
+					game.state = SunsGame.State.Paused;
+				}
+				break;
+			case Paused:
+				//don't update
+				pause();
+				break;
+		}
+
+	}
+
+	public void pause(){
+		game.batch.begin();
+//		Gdx.gl.glClearColor(100, 0, 0, 0.7f);	// Цвет фона
+//		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);	// Очищает экран при каждом кадре.
+
+		// draw menu
+		for(int i = 0; i < pauseMenuItems.length; i++) {
+			if(currentPauseItem == i) pauseMenu.setColor(Color.RED);
+			else pauseMenu.setColor(Color.WHITE);
+			pauseMenu.draw(
+					game.batch,
+					pauseMenuItems[i],
+					(SunsGame.CONFIG_WIDTH)/2,
+					400 - 35 * i
+			);
+		}
+
+		game.batch.end();
+
+		pauseHandleInput();
+	}
+
+	public void pauseHandleInput() {
+		if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+			if (currentPauseItem > 0){
+				currentPauseItem--;
+			}
+		}
+
+		if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
+			if (currentPauseItem < pauseMenuItems.length -1){
+				currentPauseItem++;
+			}
+		}
+
+		if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+			// Continue
+			if (currentPauseItem == 0) {
+				game.state = SunsGame.State.Running;
+//                dispose();
+			}
+			// back to menu
+			if (currentPauseItem == 1) {
+				game.setScreen(new MainMenuScreen(game));
+				game.state = SunsGame.State.Running;
+				dispose();
+			}
+			// quit
+			if (currentPauseItem == 2) {
+				Gdx.app.exit();
+				dispose();
+			}
+
+		}
+
+	}
+
+	public void draw(){
+		update();
 		game.batch.begin();
 
 		background.render(game.batch);	// Отрисовка фона
@@ -73,10 +153,10 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 			player2.render(game.batch);		// Отрисовка игрока}
 		}
 
-                if (badGuy.isActive()){
-                    badGuy.render(game.batch);
-                    badGuy.bulletRender(game.batch);
-                }
+		if (badGuy.isActive()){
+			badGuy.render(game.batch);
+			badGuy.bulletRender(game.batch);
+		}
 		game.batch.end();
 	}
 
@@ -84,7 +164,6 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 	public void show() {
 
 	}
-
 
 	public void resize(int width, int height) {
 		viewport.update(width, height);
@@ -96,6 +175,8 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 	}
 
 	private void update(){
+		Gdx.gl.glClearColor(0, 0, 0, 1);	// Цвет фона
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);	// Очищает экран при каждом кадре.
 
             if (badGuy.isActive())
                 badGuy.update();
@@ -111,7 +192,6 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 	
 	@Override
 	public void dispose () {
-//		batch.dispose();
-//		img.dispose();
+		pauseMenu.dispose();
 	}
 }

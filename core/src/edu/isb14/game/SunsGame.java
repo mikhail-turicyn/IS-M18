@@ -11,6 +11,12 @@ public class SunsGame extends Game {
 
     SpriteBatch batch;
 
+    public enum State{
+        Running, Paused
+    }
+
+    State state = State.Running;
+
 
     @Override
     public void create() {

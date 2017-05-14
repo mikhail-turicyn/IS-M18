@@ -63,22 +63,21 @@ public class MainMenuScreen implements Screen {
     @Override
     public void render(float delta) {
 
-        Gdx.gl.glClearColor(0, 0, 0, 1);	// Цвет фона
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);	// Очищает экран при каждом кадре.
+        Gdx.gl.glClearColor(0, 0, 0, 1);    // Цвет фона
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);    // Очищает экран при каждом кадре.
 
         game.batch.begin();
 
-        gameName.draw(game.batch, "SunsGame", (SunsGame.CONFIG_WIDTH)/2, 700);
+        gameName.draw(game.batch, "SunsGame", (SunsGame.CONFIG_WIDTH) / 2, 700);
 
         // draw menu
-        for(int i = 0; i < menuItems.length; i++) {
-//            width = font.getBounds(menuItems[i]).width;
-            if(currentItem == i) font.setColor(Color.RED);
+        for (int i = 0; i < menuItems.length; i++) {
+            if (currentItem == i) font.setColor(Color.RED);
             else font.setColor(Color.WHITE);
             font.draw(
                     game.batch,
                     menuItems[i],
-                    (SunsGame.CONFIG_WIDTH)/2,
+                    (SunsGame.CONFIG_WIDTH) / 2,
                     180 - 35 * i
             );
         }
@@ -86,62 +85,10 @@ public class MainMenuScreen implements Screen {
 
         game.batch.end();
 
-        handleInput(delta);
-
-
-//        if ( (Gdx.input.isKeyPressed(Input.Keys.DOWN)) && (target == 1) ) {
-//            onePlayer.setColor(Color.WHITE);
-//            twoPlayer.setColor(Color.RED);
-//            target = 2;
-//
-//        }
-//
-//        if ( (Gdx.input.isKeyPressed(Input.Keys.DOWN)) && (target == 2) ){
-//            twoPlayer.setColor(Color.WHITE);
-//            records.setColor(Color.RED);
-//            target = 3;
-//        }
-//        if ( (Gdx.input.isKeyPressed(Input.Keys.DOWN)) && (target == 3) ){
-//            records.setColor(Color.WHITE);
-//            config.setColor(Color.RED);
-//            target = 4;
-//        }
-//        if ( (Gdx.input.isKeyPressed(Input.Keys.DOWN)) && (target == 4) ){
-//            config.setColor(Color.WHITE);
-//            exit.setColor(Color.RED);
-//            target = 5;
-//        }
-//
-////        System.out.println("t = "+ target);
-//
-//        if ( (Gdx.input.isKeyPressed(Input.Keys.UP)) && (target == 5) ){
-//            exit.setColor(Color.WHITE);
-//            config.setColor(Color.RED);
-//            target = 4;
-//        } else if (target == 4){
-//            config.setColor(Color.WHITE);
-//            records.setColor(Color.RED);
-//            target = 3;
-//        } else if (target == 3){
-//            records.setColor(Color.WHITE);
-//            twoPlayer.setColor(Color.RED);
-//            target = 2;
-//        } else  if (target == 4){
-//            twoPlayer.setColor(Color.WHITE);
-//            onePlayer.setColor(Color.RED);
-//            target = 1;
-//        }
-//
-//        if (Gdx.input.isKeyPressed(Input.Keys.SPACE)){
-//            game.setScreen(new GameScreen(game));
-//            dispose();
-//        }
-
-
+        handleInput();
     }
 
-
-    public void handleInput(float delta) {
+    public void handleInput() {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
             if (currentItem > 0){
@@ -172,7 +119,7 @@ public class MainMenuScreen implements Screen {
             }
             // Configurations
             if (currentItem == 3) {
-                //gsm.setState(GameStateManager.HIGHSCORES);
+                game.setScreen(new ConfigScreen(game));
             }
             // Quit
             if (currentItem == 4) {
