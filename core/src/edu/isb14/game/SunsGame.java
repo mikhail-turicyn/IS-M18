@@ -10,15 +10,12 @@ public class SunsGame extends Game {
     public static final int CONFIG_HEIGHT = 720;
 
     SpriteBatch batch;
-    BitmapFont font;    // для отображения текста
-    BitmapFont gameName;
+
 
     @Override
     public void create() {
         batch = new SpriteBatch();
-        font = new BitmapFont();
-        gameName = new BitmapFont();
-        gameName.setColor(Color.RED);
+
 
         this.setScreen(new MainMenuScreen(this));
 
@@ -32,6 +29,6 @@ public class SunsGame extends Game {
     public void dispose() {
         super.dispose();
         batch.dispose();
-        font.dispose();
+
     }
 }
