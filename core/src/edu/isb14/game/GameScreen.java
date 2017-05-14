@@ -86,8 +86,6 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 
 	public void pause(){
 		game.batch.begin();
-//		Gdx.gl.glClearColor(100, 0, 0, 0.7f);	// Цвет фона
-//		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);	// Очищает экран при каждом кадре.
 
 		// draw menu
 		for(int i = 0; i < pauseMenuItems.length; i++) {
@@ -123,7 +121,6 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 			// Continue
 			if (currentPauseItem == 0) {
 				game.state = SunsGame.State.Running;
-//                dispose();
 			}
 			// back to menu
 			if (currentPauseItem == 1) {

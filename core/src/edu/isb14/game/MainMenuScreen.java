@@ -3,12 +3,9 @@ package edu.isb14.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -25,6 +22,10 @@ public class MainMenuScreen implements Screen {
     private int currentItem; // в начальный момент времени находимся на первом пункте меню - один игрок
     private String menuItems[];
 
+    private Texture texStar;
+    private final int STAR_COUNTS = 30;
+    private Star[] stars;
+
     public MainMenuScreen(final SunsGame gam) {
 //        font = TrueTypeFontFactory.createBitmapFont(Gdx.files.internal("font.ttf"), FONT_CHARACTERS, 12.5f, 7.5f, 1.0f, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 //        font.setColor(1f, 0f, 0f, 1f);
@@ -33,6 +34,12 @@ public class MainMenuScreen implements Screen {
 //        parameter.size = 12;
 //        BitmapFont font12 = generator.generateFont(parameter); // font size 12 pixels
 //        generator.dispose(); // don't forget to dispose to avoid memory leaks!
+        texStar = new Texture("star12.tga");
+        stars = new Star[STAR_COUNTS];
+        for (int i = 0; i<STAR_COUNTS; i++){
+            stars[i] = new Star();
+        }
+
         this.game = gam;
         // Настройка отображения под разными экранами
         camera = new OrthographicCamera();
@@ -62,11 +69,17 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        update();
 
         Gdx.gl.glClearColor(0, 0, 0, 1);    // Цвет фона
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);    // Очищает экран при каждом кадре.
 
         game.batch.begin();
+
+        //draw stars
+        for (int i = 0; i<STAR_COUNTS; i++){
+            game.batch.draw(texStar, stars[i].position.x, stars[i].position.y);
+        }
 
         gameName.draw(game.batch, "SunsGame", (SunsGame.CONFIG_WIDTH) / 2, 700);
 
@@ -151,8 +164,33 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        texStar.dispose();
         gameName.dispose();
         font.dispose();
+    }
+
+    public void update(){
+        for (int i = 0; i < STAR_COUNTS; i++) {
+            stars[i].update();
+        }
+    }
+
+    class Star{
+        private Vector2 position;
+        private float speed;
+
+        public Star(){
+            position = new Vector2( (float) Math.random()*SunsGame.CONFIG_WIDTH, (float) Math.random()*(SunsGame.CONFIG_HEIGHT) + SunsGame.CONFIG_HEIGHT );
+            speed = 0.5f + (float) Math.random()*1.1f; // 5px в кадр , эт плохо. нужно привязываться ко времени, которое прошло с последнего обновлния экрана
+        }
+
+        public void update(){
+            position.y -= speed;
+
+            if (position.y < -40){
+                position.x = (float) Math.random()*SunsGame.CONFIG_WIDTH;
+                position.y = (float) Math.random()*(SunsGame.CONFIG_HEIGHT) + SunsGame.CONFIG_HEIGHT;
+            }
+        }
     }
 }
