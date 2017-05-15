@@ -39,7 +39,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 		this.game = gam;
 
 		camera = new OrthographicCamera();
-		background = new Background("back.png");
+		background = new Background("bckgrnd.png");
                 badGuy = new MediumEnemy("medium.png");
                 lEn = new LightEnemy("ship2_60x60.png");
                 heavy = new HeavyEnemy("enemy.png");
@@ -148,6 +148,8 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 	public void draw(){
 		update();
 		game.batch.begin();
+
+		game.updateTime(Gdx.graphics.getDeltaTime());
 
 		background.render(game.batch);	// Отрисовка фона
 		//walkAnimation.render(batch);	// Отрисовка бегущего человечка
