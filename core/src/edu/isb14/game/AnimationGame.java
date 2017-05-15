@@ -36,7 +36,7 @@ public class AnimationGame {
         if (animation.isAnimationFinished(stateTimeExplosion) == false || loop == true ){
             stateTimeExplosion += Gdx.graphics.getDeltaTime(); //  Добавляет время в stateTimeExplosion, прошедшее с момента последней визуализации.
             currentFrame = animation.getKeyFrame(stateTimeExplosion, loop);	// Возвращает послений фрейм, для отрисовки
-            batch.draw(currentFrame, 200, 200);
+            batch.draw(currentFrame, 0, 0);
         }
 
     }

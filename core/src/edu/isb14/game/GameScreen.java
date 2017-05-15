@@ -21,7 +21,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 	private Viewport viewport;
 	private Camera camera;
 	// Анимация человечка
-	private AnimationGame walkAnimation;
+//	private AnimationGame walkAnimation;
 	// Противники
         private MediumEnemy badGuy;
         private LightEnemy lEn;
@@ -48,7 +48,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 
 		viewport = new FitViewport(SunsGame.CONFIG_WIDTH, SunsGame.CONFIG_HEIGHT, camera);	// отображение экрана с чёрными линииями по краям и сохранение пропорций
 
-		walkAnimation = new AnimationGame("sprite-animation4.png", 5, 6, 0.02f, false);
+//		walkAnimation = new AnimationGame("sprite-animation4.png", 5, 6, 0.03f, true);
 
 		onePlayers = amountPlayer;
 		if (onePlayers == true ){
@@ -152,10 +152,10 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 		game.updateTime(Gdx.graphics.getDeltaTime());
 
 		background.render(game.batch);	// Отрисовка фона
-		//walkAnimation.render(batch);	// Отрисовка бегущего человечка
+//		walkAnimation.render(game.batch);	// Отрисовка бегущего человечка
 
 		player1.render(game.batch);		// Отрисовка игрока
-		if (onePlayers == false){
+		if (!onePlayers){
 			player2.render(game.batch);		// Отрисовка игрока}
 		}
 

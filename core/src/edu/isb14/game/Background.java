@@ -97,38 +97,42 @@ public class Background {
         public void render1(SpriteBatch batch) {
 
             // draw prop
+
+            font.draw(batch, "Player1:", 25, SunsGame.CONFIG_HEIGHT - 20);
+
             for (int i = 0; i < properties.length; i++) {
                 font.draw(
                         batch,
                         properties[i],
-                        100 + i * 100,
+                        100 + i * 72,
                         SunsGame.CONFIG_HEIGHT - 20
                 );
             }
 
             font.draw(batch, String.valueOf(GameScreen.getPlayer1().getHp()), 125, SunsGame.CONFIG_HEIGHT - 20);
-            font.draw(batch, String.valueOf(GameScreen.getPlayer1().getScore()), 245, SunsGame.CONFIG_HEIGHT - 20);
+            font.draw(batch, String.valueOf(GameScreen.getPlayer1().getScore()), 217, SunsGame.CONFIG_HEIGHT - 20);
 
 
             font.draw(batch, ":", SunsGame.CONFIG_WIDTH/2, SunsGame.CONFIG_HEIGHT - 20 );
-            font.draw(batch, String.valueOf((int)SunsGame.sec), SunsGame.CONFIG_WIDTH/2 - 4, SunsGame.CONFIG_HEIGHT - 20,1f, Align.right,false );
+            font.draw(batch, String.valueOf(SunsGame.minute), SunsGame.CONFIG_WIDTH/2 - 4, SunsGame.CONFIG_HEIGHT - 20,1f, Align.right,false );
             font.draw(batch, String.valueOf((int)SunsGame.sec), SunsGame.CONFIG_WIDTH/2 + 7, SunsGame.CONFIG_HEIGHT - 20,1f, Align.left,false);
         }
 
         public void render2(SpriteBatch batch){
 
+            font.draw(batch, "Player2:", 25, SunsGame.CONFIG_HEIGHT - 40);
             // draw prop
             for (int i = 0; i < properties.length; i++) {
                 font.draw(
                         batch,
                         properties[i],
-                        SunsGame.CONFIG_WIDTH/2 + 100 + i * 100,
-                        SunsGame.CONFIG_HEIGHT - 20
+                        100 + i * 72,
+                        SunsGame.CONFIG_HEIGHT - 40
                 );
             }
 
-            font.draw(batch, String.valueOf(GameScreen.getPlayer2().getHp()), SunsGame.CONFIG_WIDTH/2 + 125, SunsGame.CONFIG_HEIGHT - 20);
-            font.draw(batch, String.valueOf(GameScreen.getPlayer2().getScore()), SunsGame.CONFIG_WIDTH/2 + 245, SunsGame.CONFIG_HEIGHT - 20);
+            font.draw(batch, String.valueOf(GameScreen.getPlayer2().getHp()), 125, SunsGame.CONFIG_HEIGHT - 40);
+            font.draw(batch, String.valueOf(GameScreen.getPlayer2().getScore()), 217, SunsGame.CONFIG_HEIGHT - 40);
         }
 
     }
