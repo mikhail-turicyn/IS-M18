@@ -25,6 +25,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 	// Противники
         private MediumEnemy badGuy;
         private LightEnemy lEn;
+        private HeavyEnemy heavy;
 	// Игроки
 	private Hero player1;
 	private Hero player2;
@@ -39,8 +40,9 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 
 		camera = new OrthographicCamera();
 		background = new Background("back.png");
-                badGuy = new MediumEnemy("enemy.png");
+                badGuy = new MediumEnemy("medium.png");
                 lEn = new LightEnemy("ship2_60x60.png");
+                heavy = new HeavyEnemy("enemy.png");
 
 		//camera = new PerspectiveCamera();
 
@@ -164,8 +166,6 @@ public class GameScreen extends ApplicationAdapter implements Screen{
                     lEn.render(game.batch);
                     lEn.bulletRender(game.batch);
                 }
-
-		background.renderStatusBar(game.batch);
 		game.batch.end();
 	}
 
@@ -193,6 +193,9 @@ public class GameScreen extends ApplicationAdapter implements Screen{
             if (lEn.isActive())
                 lEn.update();
             
+            if (heavy.isActive())
+                heavy.update();
+
             for(int i = 0; i < player1.bulletEmitter.getBulletsCount(); i++){
                 if (player1.bulletEmitter.bullets[i].isActive())
                     if(badGuy.getHitBox().contains(player1.bulletEmitter.bullets[i].getPosition()) ){
@@ -204,17 +207,14 @@ public class GameScreen extends ApplicationAdapter implements Screen{
                         lEn.getDamage(player1.getAttack()); //надо бы получить доступ к полю урона игрока
                         player1.bulletEmitter.bullets[i].destroy();
                     }
+
+                    if(heavy.getHitBox().contains(player1.bulletEmitter.bullets[i].getPosition()) ){
+                        heavy.getDamage(player1.getAttack()); //надо бы получить доступ к полю урона игрока
+                        player1.bulletEmitter.bullets[i].destroy();
+                    }
             }
 	}
-
-	public Hero getPlayer1(){
-		return player1;
-	}
-
-	public Hero getPlayer2(){
-		return player2;
-	}
-
+	
 	@Override
 	public void dispose () {
 		pauseMenu.dispose();
