@@ -25,9 +25,10 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 	// Противники
         private MediumEnemy badGuy;
         private LightEnemy lEn;
+
 	// Игроки
-	private Hero player1;
-	private Hero player2;
+	private static Hero player1;
+	private static Hero player2;
 	boolean onePlayers;
 
 	private BitmapFont pauseMenu;
@@ -88,6 +89,8 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 
 	public void pause(){
 		game.batch.begin();
+//		Gdx.gl.glClearColor(100, 0, 0, 0.7f);	// Цвет фона
+//		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);	// Очищает экран при каждом кадре.
 
 		// draw menu
 		for(int i = 0; i < pauseMenuItems.length; i++) {
@@ -123,6 +126,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 			// Continue
 			if (currentPauseItem == 0) {
 				game.state = SunsGame.State.Running;
+//                dispose();
 			}
 			// back to menu
 			if (currentPauseItem == 1) {
@@ -156,11 +160,13 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 			badGuy.render(game.batch);
 			badGuy.bulletRender(game.batch);
 		}
-                
+
                 if (lEn.isActive()){
                     lEn.render(game.batch);
                     lEn.bulletRender(game.batch);
                 }
+
+        background.renderStatusBar(game.batch, onePlayers);
 		game.batch.end();
 	}
 
@@ -184,24 +190,32 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 
             if (badGuy.isActive())
                 badGuy.update();
-            
+
             if (lEn.isActive())
                 lEn.update();
-            
+
             for(int i = 0; i < player1.bulletEmitter.getBulletsCount(); i++){
                 if (player1.bulletEmitter.bullets[i].isActive())
                     if(badGuy.getHitBox().contains(player1.bulletEmitter.bullets[i].getPosition()) ){
                         badGuy.getDamage(player1.getAttack()); //надо бы получить доступ к полю урона игрока
                         player1.bulletEmitter.bullets[i].destroy();
                     }
-                
+
                     if(lEn.getHitBox().contains(player1.bulletEmitter.bullets[i].getPosition()) ){
                         lEn.getDamage(player1.getAttack()); //надо бы получить доступ к полю урона игрока
                         player1.bulletEmitter.bullets[i].destroy();
                     }
             }
 	}
-	
+
+	public static Hero getPlayer1(){
+        return player1;
+    }
+
+    public static Hero getPlayer2(){
+        return player2;
+    }
+
 	@Override
 	public void dispose () {
 		pauseMenu.dispose();
