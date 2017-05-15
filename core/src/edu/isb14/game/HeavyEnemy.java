@@ -15,18 +15,18 @@ import com.badlogic.gdx.math.Vector2;
  *
  * @author world61
  */
-public class LightEnemy extends Enemy{
+public class HeavyEnemy extends Enemy{
     
     BulletEmitter bulletEmitter = new BulletEmitter("bullet20.png", 19f, false);
     
-    public LightEnemy(String sprite){
+    public HeavyEnemy (String sprite){
         this.active = true;
-        this.hp = 2;
-        this.attack = 1;
-        this.reward = 5;
-        this.speed = 7.0f;
+        this.hp = 10;
+        this.attack = 7;
+        this.reward = 20;
+        this.speed = 3.0f;
         this.fireCounter = 0;
-        this.fireRate = 15;
+        this.fireRate = 30;
         
         this.texture = new Texture(Gdx.files.internal(sprite));
         this.position = new Vector2(SunsGame.CONFIG_WIDTH, (float) (Math.random()*(SunsGame.CONFIG_HEIGHT - 1.5*texture.getHeight()) + texture.getHeight()/2 ));
@@ -58,7 +58,7 @@ public class LightEnemy extends Enemy{
             fireCounter = 0;                                            // счётчик сбрасываем
             for (int i = 0; i < bulletEmitter.bullets.length; i++) {        // начинаем ходить по массиву пуль, котор лежит в MyGdxGame
                 if(!bulletEmitter.bullets[i].isActive()){                    // как только находим в этом массиве не активную пулю,
-                    bulletEmitter.bullets[i].setup(position.x, position.y + +this.texture.getHeight()/2);  // мы её создаём
+                    bulletEmitter.bullets[i].setup(position.x, position.y + this.texture.getHeight()/2);  // мы её создаём
                     break;                                              // и перестаем искать ещё какие то пули
                 }
                 if (bulletEmitter.bullets[i].getPosition().x<0)
@@ -71,5 +71,4 @@ public class LightEnemy extends Enemy{
         batch.draw(texture, position.x, position.y);
         bulletEmitter.renderLinerShot(batch);
     }
-    
 }

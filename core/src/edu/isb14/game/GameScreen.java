@@ -25,7 +25,6 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 	// Противники
         private MediumEnemy badGuy;
         private LightEnemy lEn;
-
 	// Игроки
 	private static Hero player1;
 	private static Hero player2;
@@ -42,6 +41,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 		background = new Background("back.png");
                 badGuy = new MediumEnemy("enemy.png");
                 lEn = new LightEnemy("ship2_60x60.png");
+                heavy = new HeavyEnemy("enemy.png");
 
 		//camera = new PerspectiveCamera();
 
@@ -160,10 +160,15 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 			badGuy.render(game.batch);
 			badGuy.bulletRender(game.batch);
 		}
-
+                
                 if (lEn.isActive()){
                     lEn.render(game.batch);
                     lEn.bulletRender(game.batch);
+                }
+
+                if (heavy.isActive()){
+                    heavy.render(game.batch);
+                    heavy.bulletRender(game.batch);
                 }
 
         background.renderStatusBar(game.batch, onePlayers);
@@ -190,9 +195,12 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 
             if (badGuy.isActive())
                 badGuy.update();
-
+            
             if (lEn.isActive())
                 lEn.update();
+
+            if (heavy.isActive())
+                heavy.update();
 
             for(int i = 0; i < player1.bulletEmitter.getBulletsCount(); i++){
                 if (player1.bulletEmitter.bullets[i].isActive())
@@ -200,9 +208,14 @@ public class GameScreen extends ApplicationAdapter implements Screen{
                         badGuy.getDamage(player1.getAttack()); //надо бы получить доступ к полю урона игрока
                         player1.bulletEmitter.bullets[i].destroy();
                     }
-
-                    if(lEn.getHitBox().contains(player1.bulletEmitter.bullets[i].getPosition()) ){
+                
+                    if(lEn.getHitBox().contains(player1.bulletEmitter.bullets[i].getPosition())){
                         lEn.getDamage(player1.getAttack()); //надо бы получить доступ к полю урона игрока
+                        player1.bulletEmitter.bullets[i].destroy();
+                    }
+
+                    if(heavy.getHitBox().contains(player1.bulletEmitter.bullets[i].getPosition()) ){
+                        heavy.getDamage(player1.getAttack()); //надо бы получить доступ к полю урона игрока
                         player1.bulletEmitter.bullets[i].destroy();
                     }
             }

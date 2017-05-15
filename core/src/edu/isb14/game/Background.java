@@ -12,9 +12,8 @@ public class Background {
     private final int speed = 1;
     private Texture texture1;
     private Texture texture2;
-    private StatusBar statusBar;
-
-    public Background(String strBackTexture) {
+    
+    public Background(String strBackTexture){
         texture1 = new Texture(Gdx.files.internal(strBackTexture));
         position1 = 0;
 
@@ -23,8 +22,8 @@ public class Background {
         statusBar = new StatusBar();
 
     }
-
-    public void render(SpriteBatch batch) {
+    
+    public void render(SpriteBatch batch){
         update();
         batch.draw(texture1, position1, 0, SunsGame.CONFIG_WIDTH, SunsGame.CONFIG_HEIGHT);
         batch.draw(texture2, position2, 0, SunsGame.CONFIG_WIDTH, SunsGame.CONFIG_HEIGHT);
