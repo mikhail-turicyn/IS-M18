@@ -164,6 +164,8 @@ public class GameScreen extends ApplicationAdapter implements Screen{
                     lEn.render(game.batch);
                     lEn.bulletRender(game.batch);
                 }
+
+		background.renderStatusBar(game.batch);
 		game.batch.end();
 	}
 
@@ -204,7 +206,15 @@ public class GameScreen extends ApplicationAdapter implements Screen{
                     }
             }
 	}
-	
+
+	public Hero getPlayer1(){
+		return player1;
+	}
+
+	public Hero getPlayer2(){
+		return player2;
+	}
+
 	@Override
 	public void dispose () {
 		pauseMenu.dispose();
