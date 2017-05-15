@@ -166,6 +166,11 @@ public class GameScreen extends ApplicationAdapter implements Screen{
                     lEn.render(game.batch);
                     lEn.bulletRender(game.batch);
                 }
+
+                if (heavy.isActive()){
+                    heavy.render(game.batch);
+                    heavy.bulletRender(game.batch);
+                }
 		game.batch.end();
 	}
 
@@ -203,7 +208,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
                         player1.bulletEmitter.bullets[i].destroy();
                     }
                 
-                    if(lEn.getHitBox().contains(player1.bulletEmitter.bullets[i].getPosition()) ){
+                    if(lEn.getHitBox().contains(player1.bulletEmitter.bullets[i].getPosition())){
                         lEn.getDamage(player1.getAttack()); //надо бы получить доступ к полю урона игрока
                         player1.bulletEmitter.bullets[i].destroy();
                     }
