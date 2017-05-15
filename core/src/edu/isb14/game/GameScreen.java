@@ -25,6 +25,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 	// Противники
         private MediumEnemy badGuy;
         private LightEnemy lEn;
+        private HeavyEnemy heavy;
 	// Игроки
 	private static Hero player1;
 	private static Hero player2;
@@ -39,7 +40,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 
 		camera = new OrthographicCamera();
 		background = new Background("back.png");
-                badGuy = new MediumEnemy("enemy.png");
+                badGuy = new MediumEnemy("medium.png");
                 lEn = new LightEnemy("ship2_60x60.png");
                 heavy = new HeavyEnemy("enemy.png");
 

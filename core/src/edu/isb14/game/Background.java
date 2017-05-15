@@ -12,7 +12,8 @@ public class Background {
     private final int speed = 1;
     private Texture texture1;
     private Texture texture2;
-    
+    private StatusBar statusBar;
+
     public Background(String strBackTexture){
         texture1 = new Texture(Gdx.files.internal(strBackTexture));
         position1 = 0;
