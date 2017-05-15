@@ -32,14 +32,14 @@ public class Hero {
 
     // УПРАВЛЕНИЕ
         if ( player == Hero.Player.P1 ) {
-            texture = new Texture(Gdx.files.internal("ship1_80x52.png"));
+            texture = new Texture(Gdx.files.internal("bi.png"));
             left = Input.Keys.A;
             right = Input.Keys.D;
             up = Input.Keys.W;
             down = Input.Keys.S;
             fire = Input.Keys.SPACE;
         } else {
-            texture = new Texture(Gdx.files.internal("ship2_60x60.png"));
+            texture = new Texture(Gdx.files.internal("bi2.png"));
             left = Input.Keys.LEFT;
             right = Input.Keys.RIGHT;
             up = Input.Keys.UP;

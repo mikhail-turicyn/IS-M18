@@ -49,9 +49,6 @@ public class SunsGame extends Game {
             minute++;
             sec = 0;
         }
-        System.out.println("w - "+worldTime);
-        System.out.println("sec - "+sec);
-        System.out.println("min - "+minute);
     }
 
     @Override
