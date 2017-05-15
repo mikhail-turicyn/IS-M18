@@ -23,7 +23,8 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 	// Анимация человечка
 	private AnimationGame walkAnimation;
 	// Противники
-    private MediumEnemy badGuy;
+        private MediumEnemy badGuy;
+        private LightEnemy lEn;
 	// Игроки
 	private Hero player1;
 	private Hero player2;
@@ -39,6 +40,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 		camera = new OrthographicCamera();
 		background = new Background("back.png");
                 badGuy = new MediumEnemy("enemy.png");
+                lEn = new LightEnemy("ship2_60x60.png");
 
 		//camera = new PerspectiveCamera();
 
@@ -154,6 +156,11 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 			badGuy.render(game.batch);
 			badGuy.bulletRender(game.batch);
 		}
+                
+                if (lEn.isActive()){
+                    lEn.render(game.batch);
+                    lEn.bulletRender(game.batch);
+                }
 		game.batch.end();
 	}
 
@@ -178,10 +185,18 @@ public class GameScreen extends ApplicationAdapter implements Screen{
             if (badGuy.isActive())
                 badGuy.update();
             
+            if (lEn.isActive())
+                lEn.update();
+            
             for(int i = 0; i < player1.bulletEmitter.getBulletsCount(); i++){
                 if (player1.bulletEmitter.bullets[i].isActive())
                     if(badGuy.getHitBox().contains(player1.bulletEmitter.bullets[i].getPosition()) ){
                         badGuy.getDamage(player1.getAttack()); //надо бы получить доступ к полю урона игрока
+                        player1.bulletEmitter.bullets[i].destroy();
+                    }
+                
+                    if(lEn.getHitBox().contains(player1.bulletEmitter.bullets[i].getPosition()) ){
+                        lEn.getDamage(player1.getAttack()); //надо бы получить доступ к полю урона игрока
                         player1.bulletEmitter.bullets[i].destroy();
                     }
             }

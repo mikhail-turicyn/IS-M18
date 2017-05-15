@@ -21,15 +21,15 @@ public class MediumEnemy extends Enemy{
     
     public MediumEnemy(String sprite){
         this.active = true;
-        this.hp = 3;
+        this.hp = 5;
         this.attack = 3;
         this.reward = 10;
-        this.speed = 2.0f;
+        this.speed = 5.0f;
         this.fireCounter = 0;
         this.fireRate = 25;
         
         this.texture = new Texture(Gdx.files.internal(sprite));
-        this.position = new Vector2(SunsGame.CONFIG_WIDTH, (float) (Math.random()* SunsGame.CONFIG_HEIGHT - texture.getHeight()));
+        this.position = new Vector2(SunsGame.CONFIG_WIDTH, (float) (Math.random()*(SunsGame.CONFIG_HEIGHT - 1.5*texture.getHeight()) + texture.getHeight()/2 ));
         this.hitBox = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
         
     }
@@ -37,7 +37,7 @@ public class MediumEnemy extends Enemy{
     public void recreate(){
         
         this.active = true;
-        this.hp = 10;
+        this.hp = 5;
         this.position.x = SunsGame.CONFIG_WIDTH;
         this.position.y = (float) (Math.random()*(SunsGame.CONFIG_HEIGHT - 1.5*texture.getHeight()) + texture.getHeight()/2 );
         this.hitBox.x = position.x;
@@ -47,12 +47,12 @@ public class MediumEnemy extends Enemy{
     @Override
     public void update(){
         if (this.isActive()){
-            position.x -= speed;
-            hitBox.x -= speed;
+            this.position.x -= speed;
+            this.hitBox.x -= speed;
         }
 
-        if ( position.x == -this.texture.getWidth() )
-            recreate();
+        if ( this.position.x == -this.texture.getWidth() )
+            this.recreate();
         
         this.fireCounter++;                                                  // мы увеличиваем какой-то счетчик
         if (this.fireCounter > this.fireRate){                                     // если этот счётчик стал больше чем
