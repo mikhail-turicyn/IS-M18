@@ -5,12 +5,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 
 public class AnimationGame {
     private TextureRegion currentFrame;
     private float stateTimeExplosion = 0;
     private  Animation animation;
     private boolean loop;
+    private Vector2 position;
 
     AnimationGame(String strTex, int frame_rows, int frame_cols, float time, boolean loop){
         this.loop = loop;
@@ -29,6 +31,8 @@ public class AnimationGame {
                 frames[index++] = tmp[i][j];
 
         animation = new Animation(time,frames);
+
+        position = new Vector2(100,100);
     }
 
     public void render(SpriteBatch batch){
@@ -36,11 +40,22 @@ public class AnimationGame {
         if (animation.isAnimationFinished(stateTimeExplosion) == false || loop == true ){
             stateTimeExplosion += Gdx.graphics.getDeltaTime(); //  Добавляет время в stateTimeExplosion, прошедшее с момента последней визуализации.
             currentFrame = animation.getKeyFrame(stateTimeExplosion, loop);	// Возвращает послений фрейм, для отрисовки
-            batch.draw(currentFrame, 0, 0);
+            batch.draw(currentFrame, position.x, position.y);
         }
 
     }
 
+    public Vector2 getPosition(){
+        return position;
+    }
+
+    public void setPosition(Vector2 v2){
+        position.set(v2);
+    }
+
+    public void setPosition(float x, float y){
+        position.set(x,y);
+    }
 }
 
 /*  MANUAL

@@ -21,6 +21,10 @@ public class Hero {
     private Player player;
     public enum Player { P1, P2 }
 
+    boolean smokefiremini = false;
+
+    AnimationGame fly;
+
     // control
     private int left, right, up, down, fire;
 
@@ -30,16 +34,19 @@ public class Hero {
 
         position = new Vector2(30,(float) SunsGame.CONFIG_HEIGHT / 2);
 
+        fly = new AnimationGame("smokefiremini_anima.png",1,2,0.2f,true);
+//        fly.setPosition(position.x - 100, position.y);
+
     // УПРАВЛЕНИЕ
         if ( player == Hero.Player.P1 ) {
-            texture = new Texture(Gdx.files.internal("bi.png"));
+            texture = new Texture(Gdx.files.internal("bimini.png"));
             left = Input.Keys.A;
             right = Input.Keys.D;
             up = Input.Keys.W;
             down = Input.Keys.S;
             fire = Input.Keys.SPACE;
         } else {
-            texture = new Texture(Gdx.files.internal("bi2.png"));
+            texture = new Texture(Gdx.files.internal("bi2mini.png"));
             left = Input.Keys.LEFT;
             right = Input.Keys.RIGHT;
             up = Input.Keys.UP;
@@ -50,12 +57,16 @@ public class Hero {
 
     public void render(SpriteBatch batch){
         update();
+        if (smokefiremini){
+            fly.render(batch);
+        }
         batch.draw(texture, position.x, position.y);
         bulletEmitter.renderLinerShot(batch);
+
     }
 
     public void update(){
-
+        smokefiremini = false;
 // логика стельбы
         if (Gdx.input.isKeyPressed(fire)){                        // при нажатии пробел
             fireCounter++;                                                  // мы увеличиваем какой-то счетчик
@@ -90,6 +101,7 @@ public class Hero {
         }
         if (Gdx.input.isKeyPressed(right) && !Gdx.input.isKeyPressed(left)){
             position.x += speed;
+            smokefiremini = true;
 //            rect.x = position.x;
             // ограничение ПРАВО
             if (position.x > SunsGame.CONFIG_WIDTH - texture.getWidth()){
@@ -115,6 +127,7 @@ public class Hero {
 //        rect.x = position.x;
 //        rect.y = position.y;
 
+        fly.setPosition(position.x - 80, position.y-5);
     }
 
     public int getAttack(){
