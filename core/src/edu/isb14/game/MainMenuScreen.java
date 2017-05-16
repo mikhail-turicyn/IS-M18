@@ -137,6 +137,7 @@ public class MainMenuScreen implements Screen {
             // Quit
             if (currentItem == 4) {
                 Gdx.app.exit();
+                game.dispose();
             }
         }
 
