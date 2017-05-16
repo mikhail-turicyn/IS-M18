@@ -22,7 +22,6 @@ public class Background {
     private Texture mntn5;
     private float mntn1Pos;
     private final float mntnSpeed = 0.8f;
-    private float worldTime;
 
     private StatusBar statusBar;
 
@@ -30,11 +29,11 @@ public class Background {
         texture1 = new Texture(Gdx.files.internal(strBackTexture));
         position1 = 0;
 
-        mntn1 = new Texture(Gdx.files.internal("mntn 1.png"));
-        mntn2 = new Texture(Gdx.files.internal("mntn 2.png"));
-        mntn3 = new Texture(Gdx.files.internal("mntn 3.png"));
-        mntn4 = new Texture(Gdx.files.internal("mntn 4.png"));
-        mntn5 = new Texture(Gdx.files.internal("mntn 5.png"));
+        mntn1 = new Texture(Gdx.files.internal("mntn/mntn 1.png"));
+        mntn2 = new Texture(Gdx.files.internal("mntn/mntn 2.png"));
+        mntn3 = new Texture(Gdx.files.internal("mntn/mntn 3.png"));
+        mntn4 = new Texture(Gdx.files.internal("mntn/mntn 4.png"));
+        mntn5 = new Texture(Gdx.files.internal("mntn/mntn 5.png"));
         mntn1Pos = 1000f;
 
        this.game = game;
@@ -45,7 +44,6 @@ public class Background {
 //        position2 = SunsGame.CONFIG_WIDTH;
 
         statusBar = new StatusBar();
-        worldTime = 0;
 
     }
     
@@ -55,8 +53,7 @@ public class Background {
 //        batch.draw(texture2, position2, 0, SunsGame.CONFIG_WIDTH, SunsGame.CONFIG_HEIGHT);
 
         //mntn
-        worldTime+=Gdx.graphics.getDeltaTime();
-        if(worldTime >= 5){
+        if(game.worldTime >= 5){
             batch.draw(mntn1, mntn1Pos, 0);
         }
 
