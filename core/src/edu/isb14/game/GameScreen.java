@@ -206,7 +206,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
                 heavy.update();
 
             for(int i = 0; i < player1.bulletEmitter.getBulletsCount(); i++){
-                if (player1.bulletEmitter.bullets[i].isActive())
+                if (player1.bulletEmitter.bullets[i].isActive()){
                     if(badGuy.getHitBox().contains(player1.bulletEmitter.bullets[i].getPosition()) ){
                         badGuy.getDamage(player1.getAttack()); //надо бы получить доступ к полю урона игрока
                         player1.bulletEmitter.bullets[i].destroy();
@@ -221,6 +221,33 @@ public class GameScreen extends ApplicationAdapter implements Screen{
                         heavy.getDamage(player1.getAttack()); //надо бы получить доступ к полю урона игрока
                         player1.bulletEmitter.bullets[i].destroy();
                     }
+                }
+                
+                if(!onePlayers)
+                if (player2.bulletEmitter.bullets[i].isActive()){
+                    if(badGuy.getHitBox().contains(player2.bulletEmitter.bullets[i].getPosition()) ){
+                        badGuy.getDamage(player2.getAttack()); //надо бы получить доступ к полю урона игрока
+                        player2.bulletEmitter.bullets[i].destroy();
+                    }
+                
+                    if(lEn.getHitBox().contains(player2.bulletEmitter.bullets[i].getPosition())){
+                        lEn.getDamage(player2.getAttack()); //надо бы получить доступ к полю урона игрока
+                        player2.bulletEmitter.bullets[i].destroy();
+                    }
+
+                    if(heavy.getHitBox().contains(player2.bulletEmitter.bullets[i].getPosition()) ){
+                        heavy.getDamage(player2.getAttack()); //надо бы получить доступ к полю урона игрока
+                        player2.bulletEmitter.bullets[i].destroy();
+                    }
+                }
+            }
+            
+            for(int i = 0; i < badGuy.bulletEmitter.getBulletsCount(); i++){
+                if (badGuy.bulletEmitter.bullets[i].isActive()){
+                    if(player1.getHitBox().contains(badGuy.bulletEmitter.bullets[i].getPosition())){
+                        badGuy.bulletEmitter.bullets[i].destroy();
+                    }
+                }
             }
 	}
 
