@@ -25,7 +25,9 @@ public class Hero {
 
     boolean smokefiremini = false;
 
-    AnimationGame fly;
+    AnimationGame flyBigFire;
+    AnimationGame flyFire;
+    AnimationGame flySmoke;
 
     // control
     private int left, right, up, down, fire;
@@ -36,8 +38,9 @@ public class Hero {
 
         position = new Vector2(30,(float) SunsGame.CONFIG_HEIGHT / 2);
 
-        fly = new AnimationGame("smokefiremini_anima.png",1,2,0.2f,true);
-//        fly.setPosition(position.x - 100, position.y);
+        flyBigFire = new AnimationGame("fire_large.png",1,2,0.2f,true);
+        flyFire = new AnimationGame("fire_normal.png",1,2,0.2f,true);
+
 
     // УПРАВЛЕНИЕ
         if ( player == Hero.Player.P1 ) {
@@ -62,7 +65,8 @@ public class Hero {
     public void render(SpriteBatch batch){
         update();
         if (smokefiremini){
-            fly.render(batch);
+            flyBigFire.render(batch);
+            flyFire.render(batch);
         }
         batch.draw(texture, position.x, position.y);
         bulletEmitter.renderLinerShot(batch);
@@ -125,17 +129,7 @@ public class Hero {
             }
         }
 
-//        for (int i = 0; i < Asteroid.AST_COUNT; i++) {
-//            if (MyGdxGame.asteroids[i].getRect().contains(rect)){
-//                MyGdxGame.asteroids[i].recreate();
-//            }
-//
-//        }
-
-//        rect.x = position.x;
-//        rect.y = position.y;
-
-        fly.setPosition(position.x - 80, position.y-5);
+        flyBigFire.setPosition(position.x - 16, position.y + 16);
     }
 
     public int getAttack(){
