@@ -51,6 +51,12 @@ public class SunsGame extends Game {
         }
     }
 
+    public void timeDispose(){
+        worldTime = 0;
+        sec = 0;
+        minute = 0;
+    }
+
     @Override
     public void dispose() {
         super.dispose();

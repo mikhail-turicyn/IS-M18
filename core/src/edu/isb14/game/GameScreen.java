@@ -27,8 +27,8 @@ public class GameScreen extends ApplicationAdapter implements Screen{
         private LightEnemy lEn;
         private HeavyEnemy heavy;
 	// Игроки
-	private static Hero player1;
-	private static Hero player2;
+	private Hero player1;
+	private Hero player2;
 	boolean onePlayers;
 
 	private BitmapFont pauseMenu;
@@ -39,7 +39,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 		this.game = gam;
 
 		camera = new OrthographicCamera();
-		background = new Background("bckgrnd.png");
+		background = new Background("bckgrnd.png", this.game);
                 badGuy = new MediumEnemy("medium.png");
                 lEn = new LightEnemy("ship2_60x60.png");
                 heavy = new HeavyEnemy("enemy.png");
@@ -51,10 +51,8 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 //		walkAnimation = new AnimationGame("sprite-animation4.png", 5, 6, 0.03f, true);
 
 		onePlayers = amountPlayer;
-		if (onePlayers == true ){
-			player1 = new Hero(Hero.Player.P1);
-		} else {
-			player1 = new Hero(Hero.Player.P1);
+		player1 = new Hero(Hero.Player.P1);
+		if (!onePlayers){
 			player2 = new Hero(Hero.Player.P2);
 
 			player1.setPosition(30, SunsGame.CONFIG_HEIGHT/2 + 100);
@@ -127,7 +125,6 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 			// Continue
 			if (currentPauseItem == 0) {
 				game.state = SunsGame.State.Running;
-//                dispose();
 			}
 			// back to menu
 			if (currentPauseItem == 1) {
@@ -139,6 +136,8 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 			if (currentPauseItem == 2) {
 				Gdx.app.exit();
 				dispose();
+				game.timeDispose();
+				game.dispose();
 			}
 
 		}
@@ -251,16 +250,17 @@ public class GameScreen extends ApplicationAdapter implements Screen{
             }
 	}
 
-	public static Hero getPlayer1(){
+	public Hero getPlayer1(){
         return player1;
     }
 
-    public static Hero getPlayer2(){
+    public Hero getPlayer2(){
         return player2;
     }
 
 	@Override
 	public void dispose () {
+		game.timeDispose();
 		pauseMenu.dispose();
 	}
 }

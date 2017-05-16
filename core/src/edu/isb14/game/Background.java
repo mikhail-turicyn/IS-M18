@@ -26,7 +26,7 @@ public class Background {
 
     private StatusBar statusBar;
 
-    public Background(String strBackTexture){
+    public Background(String strBackTexture, SunsGame game){
         texture1 = new Texture(Gdx.files.internal(strBackTexture));
         position1 = 0;
 
@@ -36,6 +36,10 @@ public class Background {
         mntn4 = new Texture(Gdx.files.internal("mntn 4.png"));
         mntn5 = new Texture(Gdx.files.internal("mntn 5.png"));
         mntn1Pos = 1000f;
+
+       this.game = game;
+
+
 
 //        texture2 = new Texture(Gdx.files.internal(strBackTexture)); //вторая картинка, чтобы был "непрерывный паровозик"
 //        position2 = SunsGame.CONFIG_WIDTH;
@@ -109,9 +113,8 @@ public class Background {
                 );
             }
 
-            font.draw(batch, String.valueOf(GameScreen.getPlayer1().getHp()), 125, SunsGame.CONFIG_HEIGHT - 20);
-            font.draw(batch, String.valueOf(GameScreen.getPlayer1().getScore()), 217, SunsGame.CONFIG_HEIGHT - 20);
-
+            font.draw(batch, String.valueOf(((GameScreen) game.getScreen()).getPlayer1().getHp()), 125, SunsGame.CONFIG_HEIGHT - 20);
+            font.draw(batch, String.valueOf(((GameScreen) game.getScreen()).getPlayer1().getScore()), 217, SunsGame.CONFIG_HEIGHT - 20);
 
             font.draw(batch, ":", SunsGame.CONFIG_WIDTH/2, SunsGame.CONFIG_HEIGHT - 20 );
             font.draw(batch, String.valueOf(SunsGame.minute), SunsGame.CONFIG_WIDTH/2 - 4, SunsGame.CONFIG_HEIGHT - 20,1f, Align.right,false );
@@ -131,8 +134,8 @@ public class Background {
                 );
             }
 
-            font.draw(batch, String.valueOf(GameScreen.getPlayer2().getHp()), 125, SunsGame.CONFIG_HEIGHT - 40);
-            font.draw(batch, String.valueOf(GameScreen.getPlayer2().getScore()), 217, SunsGame.CONFIG_HEIGHT - 40);
+            font.draw(batch, String.valueOf( ((GameScreen) game.getScreen()).getPlayer1().getHp() ), 125, SunsGame.CONFIG_HEIGHT - 40);
+            font.draw(batch, String.valueOf( ((GameScreen) game.getScreen()).getPlayer1().getScore()  ), 217, SunsGame.CONFIG_HEIGHT - 40);
         }
 
     }
