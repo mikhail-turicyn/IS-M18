@@ -136,8 +136,6 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 			if (currentPauseItem == 2) {
 				Gdx.app.exit();
 				dispose();
-				game.timeDispose();
-				game.dispose();
 			}
 
 		}
