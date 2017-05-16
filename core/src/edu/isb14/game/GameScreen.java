@@ -262,6 +262,28 @@ public class GameScreen extends ApplicationAdapter implements Screen{
                         heavy.bulletEmitter.bullets[i].destroy();
                     }
                 }
+                
+                if(!onePlayers)
+                if (badGuy.bulletEmitter.bullets[i].isActive()){
+                    if(player2.getHitBox().contains(badGuy.bulletEmitter.bullets[i].getPosition())){
+                        player2.getDamage(badGuy.attack);
+                        badGuy.bulletEmitter.bullets[i].destroy();
+                    }
+                }
+                
+                if (lEn.bulletEmitter.bullets[i].isActive()){
+                    if(player2.getHitBox().contains(lEn.bulletEmitter.bullets[i].getPosition())){
+                        player2.getDamage(lEn.attack);
+                        lEn.bulletEmitter.bullets[i].destroy();
+                    }
+                }
+                
+                if (heavy.bulletEmitter.bullets[i].isActive()){
+                    if(player2.getHitBox().contains(heavy.bulletEmitter.bullets[i].getPosition())){
+                        player2.getDamage(heavy.attack);
+                        heavy.bulletEmitter.bullets[i].destroy();
+                    }
+                }
             }
             
 	}
