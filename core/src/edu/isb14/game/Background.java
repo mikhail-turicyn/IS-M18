@@ -12,9 +12,7 @@ public class Background {
     SunsGame game;
 
     private int position1;
-    private int position2;
-    private final int speed = 1;
-    private Texture texture1;
+    private Texture backgroundTex;
 
     // mntn textures
     private Texture mntn1;
@@ -29,7 +27,7 @@ public class Background {
     private StatusBar statusBar;
 
     public Background(String strBackTexture, SunsGame game){
-        texture1 = new Texture(Gdx.files.internal(strBackTexture));
+        backgroundTex = new Texture(Gdx.files.internal(strBackTexture));
         position1 = 0;
 
         mntn1 = new Texture(Gdx.files.internal("mntn/mntn 1.png"));
@@ -53,7 +51,7 @@ public class Background {
     
     public void render(SpriteBatch batch){
         update();
-        batch.draw(texture1, position1, 0, SunsGame.CONFIG_WIDTH, SunsGame.CONFIG_HEIGHT);
+        batch.draw(backgroundTex, position1, 0, SunsGame.CONFIG_WIDTH, SunsGame.CONFIG_HEIGHT);
 //        batch.draw(texture2, position2, 0, SunsGame.CONFIG_WIDTH, SunsGame.CONFIG_HEIGHT);
 
         //mntn
