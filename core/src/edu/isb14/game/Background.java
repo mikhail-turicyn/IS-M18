@@ -13,16 +13,7 @@ public class Background {
 
     private int position1;
     private Texture backgroundTex;
-
-    // mntn textures
-    private Texture mntn1;
-    private Texture mntn2;
-    private Texture mntn3;
-    private Texture mntn4;
-    private Texture mntn5;
-    private float mntnPos[];
-    private final float mntnSpeed = 4f;
-
+    private MntnEmmiter mntnEmmiter;
     private CloudEmmiter cloudEmmiter;
     private StatusBar statusBar;
 
@@ -30,18 +21,8 @@ public class Background {
         backgroundTex = new Texture(Gdx.files.internal(strBackTexture));
         position1 = 0;
 
-        mntn1 = new Texture(Gdx.files.internal("mntn/mntn 1.png"));
-        mntn2 = new Texture(Gdx.files.internal("mntn/mntn 2.png"));
-        mntn3 = new Texture(Gdx.files.internal("mntn/mntn 3.png"));
-        mntn4 = new Texture(Gdx.files.internal("mntn/mntn 4.png"));
-        mntn5 = new Texture(Gdx.files.internal("mntn/mntn 5.png"));
-
         cloudEmmiter = new CloudEmmiter();
-
-        mntnPos = new float[5];
-        for (int i = 0; i <mntnPos.length; i++) {
-            mntnPos[i] = 100 +700*i;
-        }
+        mntnEmmiter = new MntnEmmiter();
 
         this.game = game;
 
@@ -52,20 +33,9 @@ public class Background {
     public void render(SpriteBatch batch){
         update();
         batch.draw(backgroundTex, position1, 0, SunsGame.CONFIG_WIDTH, SunsGame.CONFIG_HEIGHT);
-//        batch.draw(texture2, position2, 0, SunsGame.CONFIG_WIDTH, SunsGame.CONFIG_HEIGHT);
 
-        //mntn
-//        if(game.worldTime >= 1){
-            batch.draw(mntn3, mntnPos[1], 0);
-            batch.draw(mntn1, mntnPos[0], 0);
-            batch.draw(mntn2, mntnPos[2], 0);
-            batch.draw(mntn4, mntnPos[3], 0);
-            batch.draw(mntn5, mntnPos[4], 0);
-
-            cloudEmmiter.render(batch);
-//        }
-
-
+        mntnEmmiter.render(batch);
+        cloudEmmiter.render(batch);
     }
 
     public void renderStatusBar(SpriteBatch batch, boolean onePlayers){
@@ -76,13 +46,76 @@ public class Background {
     }
 
     public void update() { //движение картинки
-        for (int i = 0; i < mntnPos.length; i++) {
-            mntnPos[i] -= mntnSpeed;
+
+    }
+
+
+    class MntnEmmiter{
+        private String mntnItems[];
+        private final int MNTN_COUNTS = 10;
+        private Mntn[] mntns;
+        private int vib;
+
+        public MntnEmmiter(){
+            mntnItems = new String[]{
+                    "mntn/mntn 1.png",
+                    "mntn/mntn 2.png",
+                    "mntn/mntn 3.png",
+                    "mntn/mntn 4.png",
+                    "mntn/mntn 5.png",
+            };
+
+            this.mntns = new Mntn[MNTN_COUNTS];
+
+            for (int i = 0; i < MNTN_COUNTS; i++) {
+                vib = (int) (Math.random() * 5.0);
+                switch (vib) {
+                    case 1: mntns[i] = new Mntn(mntnItems[0]); break;
+                    case 2: mntns[i] = new Mntn(mntnItems[1]); break;
+                    case 3: mntns[i] = new Mntn(mntnItems[2]); break;
+                    case 4: mntns[i] = new Mntn(mntnItems[3]); break;
+                    case 5: mntns[i] = new Mntn(mntnItems[4]); break;
+                    default: mntns[i] = new Mntn(mntnItems[4]); break;
+                }
+
+            }
+
+        }
+
+        public void render(SpriteBatch batch){
+            for (int i = 0; i < MNTN_COUNTS; i++) {
+                mntns[i].render(batch);
+            }
+        }
+
+        class Mntn{
+            private float speed;
+            private Vector2 position;
+            private Texture cloudTex;
+
+            public Mntn(String cloudTex){
+                this.cloudTex = new Texture(Gdx.files.internal(cloudTex));
+                speed = 5f;
+                position = new Vector2( SunsGame.CONFIG_WIDTH +(float)(3000*Math.random()), 0 );
+
+            }
+
+            public void render(SpriteBatch batch){
+                batch.draw(cloudTex, position.x, position.y);
+                update();
+            }
+
+            public void update(){
+                position.x -= speed;
+                if (position.x < -1180){
+                    position.x = SunsGame.CONFIG_WIDTH +(float)(3000*Math.random());
+                    position.y = 0;
+                }
+            }
         }
 
 
     }
-
 
     class CloudEmmiter{
         private String cloudItems[];
@@ -128,7 +161,7 @@ public class Background {
         }
 
         class Cloud{
-            private float speed = 1f;
+            private float speed;
             private Vector2 position;
             private Texture cloudTex;
 
