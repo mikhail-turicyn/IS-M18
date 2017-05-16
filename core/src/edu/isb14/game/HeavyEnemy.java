@@ -36,7 +36,7 @@ public class HeavyEnemy extends Enemy{
     public void recreate(){
         
         this.active = true;
-        this.hp = 2;
+        this.hp = 10;
         this.position.x = SunsGame.CONFIG_WIDTH;
         this.position.y = (float) (Math.random()*(SunsGame.CONFIG_HEIGHT - 1.5*texture.getHeight()) + texture.getHeight()/2 );
         this.hitBox.x = position.x;

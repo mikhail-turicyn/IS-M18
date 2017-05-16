@@ -203,7 +203,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
                 heavy.update();
 
             for(int i = 0; i < player1.bulletEmitter.getBulletsCount(); i++){
-                if (player1.bulletEmitter.bullets[i].isActive())
+                if (player1.bulletEmitter.bullets[i].isActive()){
                     if(badGuy.getHitBox().contains(player1.bulletEmitter.bullets[i].getPosition()) ){
                         badGuy.getDamage(player1.getAttack()); //надо бы получить доступ к полю урона игрока
                         player1.bulletEmitter.bullets[i].destroy();
@@ -218,6 +218,103 @@ public class GameScreen extends ApplicationAdapter implements Screen{
                         heavy.getDamage(player1.getAttack()); //надо бы получить доступ к полю урона игрока
                         player1.bulletEmitter.bullets[i].destroy();
                     }
+                }
+                
+                if(!onePlayers)
+                if (player2.bulletEmitter.bullets[i].isActive()){
+                    if(badGuy.getHitBox().contains(player2.bulletEmitter.bullets[i].getPosition()) ){
+                        badGuy.getDamage(player2.getAttack()); //надо бы получить доступ к полю урона игрока
+                        player2.bulletEmitter.bullets[i].destroy();
+                    }
+                
+                    if(lEn.getHitBox().contains(player2.bulletEmitter.bullets[i].getPosition())){
+                        lEn.getDamage(player2.getAttack()); //надо бы получить доступ к полю урона игрока
+                        player2.bulletEmitter.bullets[i].destroy();
+                    }
+
+                    if(heavy.getHitBox().contains(player2.bulletEmitter.bullets[i].getPosition()) ){
+                        heavy.getDamage(player2.getAttack()); //надо бы получить доступ к полю урона игрока
+                        player2.bulletEmitter.bullets[i].destroy();
+                    }
+                }
+            }
+            
+            for(int i = 0; i < badGuy.bulletEmitter.getBulletsCount(); i++){
+                if (badGuy.bulletEmitter.bullets[i].isActive()){
+                    if(player1.getHitBox().contains(badGuy.bulletEmitter.bullets[i].getPosition())){
+                        player1.getDamage(badGuy.attack);
+                        badGuy.bulletEmitter.bullets[i].destroy();
+                    }
+                }
+                
+                if (lEn.bulletEmitter.bullets[i].isActive()){
+                    if(player1.getHitBox().contains(lEn.bulletEmitter.bullets[i].getPosition())){
+                        player1.getDamage(lEn.attack);
+                        lEn.bulletEmitter.bullets[i].destroy();
+                    }
+                }
+                
+                if (heavy.bulletEmitter.bullets[i].isActive()){
+                    if(player1.getHitBox().contains(heavy.bulletEmitter.bullets[i].getPosition())){
+                        player1.getDamage(heavy.attack);
+                        heavy.bulletEmitter.bullets[i].destroy();
+                    }
+                }
+                
+                if(!onePlayers){
+                if (badGuy.bulletEmitter.bullets[i].isActive()){
+                    if(player2.getHitBox().contains(badGuy.bulletEmitter.bullets[i].getPosition())){
+                        player2.getDamage(badGuy.attack);
+                        badGuy.bulletEmitter.bullets[i].destroy();
+                    }
+                }
+                
+                if (lEn.bulletEmitter.bullets[i].isActive()){
+                    if(player2.getHitBox().contains(lEn.bulletEmitter.bullets[i].getPosition())){
+                        player2.getDamage(lEn.attack);
+                        lEn.bulletEmitter.bullets[i].destroy();
+                    }
+                }
+                
+                if (heavy.bulletEmitter.bullets[i].isActive()){
+                    if(player2.getHitBox().contains(heavy.bulletEmitter.bullets[i].getPosition())){
+                        player2.getDamage(heavy.attack);
+                        heavy.bulletEmitter.bullets[i].destroy();
+                        }
+                    }
+                }
+            }
+            
+            if ( badGuy.getHitBox().contains(player1.getHitBox())){
+                player1.getDamage(badGuy.hp);
+                badGuy.getDamage(player1.getHp());
+            }
+            
+            if (player1.getHitBox().contains(lEn.position)){
+                player1.getDamage(lEn.hp);
+                lEn.getDamage(player1.getHp());
+            }
+            
+            if ( heavy.getHitBox().contains(player1.getHitBox())){
+                player1.getDamage(heavy.hp);
+                heavy.getDamage(player1.getHp());
+            }
+            
+            if(!onePlayers){
+                if ( badGuy.getHitBox().contains(player2.getHitBox())){
+                    player2.getDamage(badGuy.hp);
+                    badGuy.getDamage(player2.getHp());
+                }
+            
+                if ( player2.getHitBox().contains(lEn.position)){
+                    player2.getDamage(lEn.hp);
+                    lEn.getDamage(player2.getHp());
+                }
+            
+                if ( heavy.getHitBox().contains(player2.getHitBox())){
+                    player2.getDamage(heavy.hp);
+                    heavy.getDamage(player2.getHp());
+                }
             }
 	}
 

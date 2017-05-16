@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 // Класс игрока, объкты класса будут названы как Player 1, Player2
@@ -18,6 +19,7 @@ public class Hero {
     private int fireRate = 5;       //
     private int fireCounter = 0;    // how many time press SPACE
     private Vector2 position;
+    protected Rectangle hitBox;
     private Player player;
     public enum Player { P1, P2 }
 
@@ -53,6 +55,8 @@ public class Hero {
             down = Input.Keys.DOWN;
             fire = Input.Keys.NUMPAD_3;
         }
+        
+        this.hitBox = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
     }
 
     public void render(SpriteBatch batch){
@@ -85,6 +89,7 @@ public class Hero {
 
         if (Gdx.input.isKeyPressed(up) && !Gdx.input.isKeyPressed(down)){
             position.y += speed;
+            hitBox.y = position.y;
 //            rect.y = position.y;
             // ограничение ВЕРХ
             if (position.y > SunsGame.CONFIG_HEIGHT - texture.getHeight()){
@@ -93,7 +98,8 @@ public class Hero {
         }
         if (Gdx.input.isKeyPressed(down) && !Gdx.input.isKeyPressed(up)){
             position.y -= speed;
-//            rect.y = position.y;
+            hitBox.y = position.y;
+
             // ограничение НИЗ
             if (position.y < 25){   // 25 - высота статус бара
                 position.y = 25;
@@ -101,6 +107,7 @@ public class Hero {
         }
         if (Gdx.input.isKeyPressed(right) && !Gdx.input.isKeyPressed(left)){
             position.x += speed;
+            hitBox.x = position.x;
             smokefiremini = true;
 //            rect.x = position.x;
             // ограничение ПРАВО
@@ -110,6 +117,7 @@ public class Hero {
         }
         if (Gdx.input.isKeyPressed(left) && !Gdx.input.isKeyPressed(right)){
             position.x -= speed;
+            hitBox.x = position.x;
 //            rect.x = position.x;
             // ограничение ЛЕВО
             if (position.x < 0){
@@ -144,6 +152,25 @@ public class Hero {
 
     public void setPosition(float x, float y){
         position.set(x,y);
+    }
+    public Rectangle getHitBox(){
+        return this.hitBox;
+    }
+    
+    public void getDamage(int dmg){
+        this.hp -= dmg;
+        if (this.hp <=0)
+            this.destroy();
+    }
+    
+    public void destroy(){
+        this.hitBox.set(-texture.getWidth(), -texture.getHeight(), 0, 0);
+        this.position.set(-texture.getWidth(), -texture.getHeight());
+        left = 0;
+        right = 0;
+        up = 0;
+        down = 0;
+        fire = 0;
     }
 }
 
