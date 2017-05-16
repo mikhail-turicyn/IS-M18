@@ -12,7 +12,7 @@ public class Hero {
     private Texture texture;
 //    State state = new State();
     BulletEmitter bulletEmitter = new BulletEmitter("bullet20.png", 20.0f); // 1 - текстура, 2 - скорость пули
-    private int hp = 100;
+    private int hp = 10;
     private int score = 0;
     private int attack = 1;
     private float speed = 10.0f;
@@ -155,6 +155,22 @@ public class Hero {
     }
     public Rectangle getHitBox(){
         return this.hitBox;
+    }
+    
+    public void getDamage(int dmg){
+        this.hp -= dmg;
+        if (this.hp <=0)
+            this.destroy();
+    }
+    
+    public void destroy(){
+        this.hitBox.setSize(0, 0);
+        this.position.set(-texture.getWidth(), -texture.getHeight());
+        left = 0;
+        right = 0;
+        up = 0;
+        down = 0;
+        fire = 0;
     }
 }
 

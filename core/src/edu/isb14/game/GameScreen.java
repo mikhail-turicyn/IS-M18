@@ -244,10 +244,26 @@ public class GameScreen extends ApplicationAdapter implements Screen{
             for(int i = 0; i < badGuy.bulletEmitter.getBulletsCount(); i++){
                 if (badGuy.bulletEmitter.bullets[i].isActive()){
                     if(player1.getHitBox().contains(badGuy.bulletEmitter.bullets[i].getPosition())){
+                        player1.getDamage(badGuy.attack);
                         badGuy.bulletEmitter.bullets[i].destroy();
                     }
                 }
+                
+                if (lEn.bulletEmitter.bullets[i].isActive()){
+                    if(player1.getHitBox().contains(lEn.bulletEmitter.bullets[i].getPosition())){
+                        player1.getDamage(lEn.attack);
+                        lEn.bulletEmitter.bullets[i].destroy();
+                    }
+                }
+                
+                if (heavy.bulletEmitter.bullets[i].isActive()){
+                    if(player1.getHitBox().contains(heavy.bulletEmitter.bullets[i].getPosition())){
+                        player1.getDamage(heavy.attack);
+                        heavy.bulletEmitter.bullets[i].destroy();
+                    }
+                }
             }
+            
 	}
 
 	public Hero getPlayer1(){
