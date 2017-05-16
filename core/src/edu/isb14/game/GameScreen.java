@@ -263,7 +263,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
                     }
                 }
                 
-                if(!onePlayers)
+                if(!onePlayers){
                 if (badGuy.bulletEmitter.bullets[i].isActive()){
                     if(player2.getHitBox().contains(badGuy.bulletEmitter.bullets[i].getPosition())){
                         player2.getDamage(badGuy.attack);
@@ -282,10 +282,42 @@ public class GameScreen extends ApplicationAdapter implements Screen{
                     if(player2.getHitBox().contains(heavy.bulletEmitter.bullets[i].getPosition())){
                         player2.getDamage(heavy.attack);
                         heavy.bulletEmitter.bullets[i].destroy();
+                        }
                     }
                 }
             }
             
+            if ( badGuy.getHitBox().contains(player1.getHitBox())){
+                player1.getDamage(badGuy.hp);
+                badGuy.getDamage(player1.getHp());
+            }
+            
+            if (player1.getHitBox().contains(lEn.position)){
+                player1.getDamage(lEn.hp);
+                lEn.getDamage(player1.getHp());
+            }
+            
+            if ( heavy.getHitBox().contains(player1.getHitBox())){
+                player1.getDamage(heavy.hp);
+                heavy.getDamage(player1.getHp());
+            }
+            
+            if(!onePlayers){
+                if ( badGuy.getHitBox().contains(player2.getHitBox())){
+                    player2.getDamage(badGuy.hp);
+                    badGuy.getDamage(player2.getHp());
+                }
+            
+                if ( player2.getHitBox().contains(lEn.position)){
+                    player2.getDamage(lEn.hp);
+                    lEn.getDamage(player2.getHp());
+                }
+            
+                if ( heavy.getHitBox().contains(player2.getHitBox())){
+                    player2.getDamage(heavy.hp);
+                    heavy.getDamage(player2.getHp());
+                }
+            }
 	}
 
 	public Hero getPlayer1(){
