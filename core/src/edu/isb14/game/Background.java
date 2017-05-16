@@ -15,7 +15,7 @@ public class Background {
     private int position2;
     private final int speed = 1;
     private Texture texture1;
-//    private Texture texture2;
+
     // mntn textures
     private Texture mntn1;
     private Texture mntn2;
@@ -24,7 +24,6 @@ public class Background {
     private Texture mntn5;
     private float mntnPos[];
     private final float mntnSpeed = 4f;
-
 
     private CloudEmmiter cloudEmmiter;
     private StatusBar statusBar;
@@ -41,24 +40,12 @@ public class Background {
 
         cloudEmmiter = new CloudEmmiter();
 
-
-//        mntnPos = new float[]{
-//                SunsGame.CONFIG_WIDTH,
-//        };
-
         mntnPos = new float[5];
         for (int i = 0; i <mntnPos.length; i++) {
             mntnPos[i] = 100 +700*i;
         }
 
-
-
-       this.game = game;
-
-
-
-//        texture2 = new Texture(Gdx.files.internal(strBackTexture)); //вторая картинка, чтобы был "непрерывный паровозик"
-//        position2 = SunsGame.CONFIG_WIDTH;
+        this.game = game;
 
         statusBar = new StatusBar();
 
@@ -70,7 +57,7 @@ public class Background {
 //        batch.draw(texture2, position2, 0, SunsGame.CONFIG_WIDTH, SunsGame.CONFIG_HEIGHT);
 
         //mntn
-        if(game.worldTime >= 1){
+//        if(game.worldTime >= 1){
             batch.draw(mntn3, mntnPos[1], 0);
             batch.draw(mntn1, mntnPos[0], 0);
             batch.draw(mntn2, mntnPos[2], 0);
@@ -78,7 +65,7 @@ public class Background {
             batch.draw(mntn5, mntnPos[4], 0);
 
             cloudEmmiter.render(batch);
-        }
+//        }
 
 
     }
@@ -91,16 +78,6 @@ public class Background {
     }
 
     public void update() { //движение картинки
-//        position1 -= speed;
-//
-//        if (position1 <= -SunsGame.CONFIG_WIDTH)
-//            position1 = SunsGame.CONFIG_WIDTH; // не 1280, ибо появляется чёрная вертикальная полоса
-//
-//        position2 -= speed;
-//        if (position2 <= -SunsGame.CONFIG_WIDTH)
-//            position2 = SunsGame.CONFIG_WIDTH;
-//        System.out.println("p1="+position1+" p2="+position2+" delta = "+(position2-position1));
-
         for (int i = 0; i < mntnPos.length; i++) {
             mntnPos[i] -= mntnSpeed;
         }
