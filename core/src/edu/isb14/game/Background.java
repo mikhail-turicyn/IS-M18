@@ -95,7 +95,7 @@ public class Background {
 
             public Mntn(String cloudTex){
                 this.cloudTex = new Texture(Gdx.files.internal(cloudTex));
-                speed = 5f;
+                speed = 0.8f;
                 position = new Vector2( SunsGame.CONFIG_WIDTH +(float)(3000*Math.random()), 0 );
 
             }

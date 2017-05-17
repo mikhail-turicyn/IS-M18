@@ -51,7 +51,7 @@ public class MediumEnemy extends Enemy{
             this.hitBox.x -= speed;
         }
 
-        if ( this.position.x == -this.texture.getWidth() )
+        if ( this.position.x < -this.texture.getWidth() )
             this.recreate();
         
         this.fireCounter++;                                                  // мы увеличиваем какой-то счетчик
