@@ -42,7 +42,6 @@ public class Hero {
         flyFire = new AnimationGame("fire_normal.png",1,2,0.2f,true);
         flySmoke = new AnimationGame("smoke_sp.png",1,2,0.2f,true);
 
-
     // УПРАВЛЕНИЕ
         if ( player == Hero.Player.P1 ) {
             texture = new Texture(Gdx.files.internal("bimini.png"));
