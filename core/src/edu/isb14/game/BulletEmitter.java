@@ -66,7 +66,7 @@ public class BulletEmitter {
         }
     }
 
-    private static Texture texBullet;
+    private Texture texBullet;
     private int bulletsCount = 50; // Кол-во пуль, такое чтобы массив пуль никогда не был полностью заполнен
     public Bullet[] bullets;
 

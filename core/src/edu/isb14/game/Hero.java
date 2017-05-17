@@ -23,7 +23,7 @@ public class Hero {
     private Player player;
     public enum Player { P1, P2 }
 
-    boolean smokefiremini = false;
+    boolean flyRight = false;
 
     AnimationGame flyBigFire;
     AnimationGame flyFire;
@@ -38,8 +38,9 @@ public class Hero {
 
         position = new Vector2(30,(float) SunsGame.CONFIG_HEIGHT / 2);
 
-        flyBigFire = new AnimationGame("fire_large.png",1,2,0.2f,true);
+        flyBigFire = new AnimationGame("fire_large2.png",1,2,0.2f,true);
         flyFire = new AnimationGame("fire_normal.png",1,2,0.2f,true);
+        flySmoke = new AnimationGame("smoke_sp.png",1,2,0.2f,true);
 
 
     // УПРАВЛЕНИЕ
@@ -64,17 +65,20 @@ public class Hero {
 
     public void render(SpriteBatch batch){
         update();
-        if (smokefiremini){
+        flyFire.render(batch);
+        if (flyRight){
+
+//            flySmoke.render(batch);
             flyBigFire.render(batch);
-            flyFire.render(batch);
         }
+
         batch.draw(texture, position.x, position.y);
         bulletEmitter.renderLinerShot(batch);
 
     }
 
     public void update(){
-        smokefiremini = false;
+        flyRight = false;
 // логика стельбы
         if (Gdx.input.isKeyPressed(fire)){                        // при нажатии пробел
             fireCounter++;                                                  // мы увеличиваем какой-то счетчик
@@ -112,7 +116,7 @@ public class Hero {
         if (Gdx.input.isKeyPressed(right) && !Gdx.input.isKeyPressed(left)){
             position.x += speed;
             hitBox.x = position.x;
-            smokefiremini = true;
+            flyRight = true;
 //            rect.x = position.x;
             // ограничение ПРАВО
             if (position.x > SunsGame.CONFIG_WIDTH - texture.getWidth()){
@@ -129,7 +133,9 @@ public class Hero {
             }
         }
 
-        flyBigFire.setPosition(position.x - 16, position.y + 16);
+        flyBigFire.setPosition(position.x - 30, position.y + 14);
+        flyFire.setPosition(position.x - 16, position.y + 17);
+        flySmoke.setPosition(position.x - 100, position.y -11);
     }
 
     public int getAttack(){

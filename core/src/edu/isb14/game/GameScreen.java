@@ -40,7 +40,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 
 		camera = new OrthographicCamera();
 		background = new Background("bckgrnd.png", this.game);
-                badGuy = new MediumEnemy("medium.png");
+                badGuy = new MediumEnemy("enemy_ufo_black.png");
                 lEn = new LightEnemy("ship2_60x60.png");
                 heavy = new HeavyEnemy("enemy.png");
 

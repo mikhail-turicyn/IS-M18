@@ -17,7 +17,7 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class MediumEnemy extends Enemy{
     
-    BulletEmitter bulletEmitter = new BulletEmitter("bullet20.png", 19f, false);
+    BulletEmitter bulletEmitter = new BulletEmitter("enemy_ufo_black_shot.png", 19f, false);
     
     public MediumEnemy(String sprite){
         this.active = true;
