@@ -34,21 +34,21 @@ public class LightEnemy extends Enemy{
     }
     
     public void recreate(){
-        
-        this.active = true;
         this.hp = 2;
-        this.position.x = SunsGame.CONFIG_WIDTH;
+        this.position.x = SunsGame.CONFIG_WIDTH + this.texture.getWidth() * 2;
         this.position.y = (float) (Math.random()*(SunsGame.CONFIG_HEIGHT - 1.5*texture.getHeight()) + texture.getHeight()/2 );
-        this.hitBox.x = position.x;
+        this.hitBox.x = position.x + this.texture.getWidth() * 2;
         this.hitBox.y = position.y;
     }
     
     @Override
     public void update(){
-        if (this.isActive()){
-            this.position.x -= speed;
-            this.hitBox.x -= speed;
-        }
+        
+        if (this.position.x <= SunsGame.CONFIG_WIDTH) 
+            this.active = true;
+        
+        this.position.x -= speed;
+        this.hitBox.x -= speed;
         
         if (this.position.x < -this.texture.getWidth())
             this.recreate();

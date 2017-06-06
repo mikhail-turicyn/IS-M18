@@ -207,16 +207,22 @@ public class GameScreen extends ApplicationAdapter implements Screen{
                     if(badGuy.getHitBox().contains(player1.bulletEmitter.bullets[i].getPosition()) ){
                         badGuy.getDamage(player1.getAttack()); //надо бы получить доступ к полю урона игрока
                         player1.bulletEmitter.bullets[i].destroy();
+                        if (!badGuy.isActive())
+                            player1.addScore(badGuy.getReward());
                     }
                 
                     if(lEn.getHitBox().contains(player1.bulletEmitter.bullets[i].getPosition())){
                         lEn.getDamage(player1.getAttack()); //надо бы получить доступ к полю урона игрока
                         player1.bulletEmitter.bullets[i].destroy();
+                        if (!lEn.isActive())
+                            player1.addScore(lEn.getReward());
                     }
 
                     if(heavy.getHitBox().contains(player1.bulletEmitter.bullets[i].getPosition()) ){
                         heavy.getDamage(player1.getAttack()); //надо бы получить доступ к полю урона игрока
                         player1.bulletEmitter.bullets[i].destroy();
+                        if (!heavy.isActive())
+                            player1.addScore(heavy.getReward());
                     }
                 }
                 
@@ -225,16 +231,22 @@ public class GameScreen extends ApplicationAdapter implements Screen{
                     if(badGuy.getHitBox().contains(player2.bulletEmitter.bullets[i].getPosition()) ){
                         badGuy.getDamage(player2.getAttack()); //надо бы получить доступ к полю урона игрока
                         player2.bulletEmitter.bullets[i].destroy();
+                        if (!badGuy.isActive())
+                            player2.addScore(badGuy.getReward());
                     }
                 
                     if(lEn.getHitBox().contains(player2.bulletEmitter.bullets[i].getPosition())){
                         lEn.getDamage(player2.getAttack()); //надо бы получить доступ к полю урона игрока
                         player2.bulletEmitter.bullets[i].destroy();
+                        if (!lEn.isActive())
+                            player2.addScore(lEn.getReward());
                     }
 
                     if(heavy.getHitBox().contains(player2.bulletEmitter.bullets[i].getPosition()) ){
                         heavy.getDamage(player2.getAttack()); //надо бы получить доступ к полю урона игрока
                         player2.bulletEmitter.bullets[i].destroy();
+                        if (!heavy.isActive())
+                            player2.addScore(heavy.getReward());
                     }
                 }
             }
@@ -244,6 +256,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
                     if(player1.getHitBox().contains(badGuy.bulletEmitter.bullets[i].getPosition())){
                         player1.getDamage(badGuy.attack);
                         badGuy.bulletEmitter.bullets[i].destroy();
+                        player1.addScore(badGuy.getReward());
                     }
                 }
                 
@@ -251,6 +264,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
                     if(player1.getHitBox().contains(lEn.bulletEmitter.bullets[i].getPosition())){
                         player1.getDamage(lEn.attack);
                         lEn.bulletEmitter.bullets[i].destroy();
+                        player1.addScore(lEn.getReward());
                     }
                 }
                 
@@ -258,6 +272,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
                     if(player1.getHitBox().contains(heavy.bulletEmitter.bullets[i].getPosition())){
                         player1.getDamage(heavy.attack);
                         heavy.bulletEmitter.bullets[i].destroy();
+                        player1.addScore(heavy.getReward());
                     }
                 }
                 
@@ -266,6 +281,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
                     if(player2.getHitBox().contains(badGuy.bulletEmitter.bullets[i].getPosition())){
                         player2.getDamage(badGuy.attack);
                         badGuy.bulletEmitter.bullets[i].destroy();
+                        player2.addScore(badGuy.getReward());
                     }
                 }
                 
@@ -273,6 +289,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
                     if(player2.getHitBox().contains(lEn.bulletEmitter.bullets[i].getPosition())){
                         player2.getDamage(lEn.attack);
                         lEn.bulletEmitter.bullets[i].destroy();
+                        player2.addScore(lEn.getReward());
                     }
                 }
                 
@@ -280,6 +297,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
                     if(player2.getHitBox().contains(heavy.bulletEmitter.bullets[i].getPosition())){
                         player2.getDamage(heavy.attack);
                         heavy.bulletEmitter.bullets[i].destroy();
+                        player2.addScore(heavy.getReward());
                         }
                     }
                 }

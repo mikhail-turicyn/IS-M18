@@ -148,6 +148,10 @@ public class Hero {
     public int getScore(){
         return score;
     }
+    
+    public void addScore(int reward){
+        this.score += reward;
+    }
 
     public void setPosition(float x, float y){
         position.set(x,y);

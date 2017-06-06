@@ -50,6 +50,10 @@ public abstract class Enemy {
     public Rectangle getHitBox(){
         return hitBox;
     }
+    
+    public int getReward(){
+        return this.reward;
+    }
         
     public abstract void update();
     
