@@ -1,6 +1,7 @@
 package ru.vladigeras.warehouse;
 
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Abstract warehouse entity
@@ -10,11 +11,21 @@ import java.util.Collection;
 public abstract class Warehouse {
 	private Long id;
 	private String title;
-	private Collection items;
+	protected static List<Item> items = new ArrayList<>();
 
-	public abstract void addItem();
+	public Warehouse() {
+	}
 
-	public abstract void removeItem();
+	public Warehouse(Long id, String title) {
+		this.id = id;
+		this.title = title;
+	}
+
+	public abstract void addItem(Item item);
+
+	public abstract void removeItem(Item item);
+
+	public abstract void printItems();
 
 	public Long getId() {
 		return id;
@@ -32,7 +43,7 @@ public abstract class Warehouse {
 		this.title = title;
 	}
 
-	public Collection getItems() {
+	public List<Item> getItems() {
 		return items;
 	}
 }
