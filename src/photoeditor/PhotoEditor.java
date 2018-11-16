@@ -3,19 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package photoeditor;
+package anaglyph3d;
 
-/**
- *
- * @author Alexander
- */
-public class PhotoEditor {
+public class Anaglyph3D {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        new NewJFrame().setVisible(true);
     }
     
 }
