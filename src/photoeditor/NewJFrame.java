@@ -5,17 +5,117 @@
  */
 package photoeditor;
 
+import java.awt.Graphics;
+import javafx.stage.FileChooser;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.JComponent;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author Alexander
  */
 public class NewJFrame extends javax.swing.JFrame {
-
+    private BufferedImage image;
     /**
      * Creates new form NewJFrame
      */
     public NewJFrame() {
-        initComponents();
+        setTitle("Фото фильтр");
+        setSize(640, 480);
+        setExtendedState(MAXIMIZED_BOTH);
+        
+        FileChooser = new javax.swing.JFileChooser();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        file = new javax.swing.JMenu();
+        Open = new javax.swing.JMenuItem();
+        Clear = new javax.swing.JMenuItem();
+        Save = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        Exit = new javax.swing.JMenuItem();
+        
+        FileChooser.setDialogTitle("Мой открытый диалог");
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(300, 300));
+
+        file.setText("Файл");
+        
+        Open.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        Open.setText("Открыть");
+        Open.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OpenActionPerformed(evt);
+            }
+        });
+        file.add(Open);
+        
+        Clear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        Clear.setText("Очистить");
+        Clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClearActionPerformed(evt);
+            }
+        });
+        file.add(Clear);
+        
+        Save.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        Save.setText("Сохранить");
+        Save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveActionPerformed(evt);
+            }
+        });
+        file.add(Save);
+        file.add(jSeparator1);
+
+        Exit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
+        Exit.setText("Выход");
+        Exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitActionPerformed(evt);
+            }
+        });
+        file.add(Exit);
+        
+        jMenuBar1.add(file);
+        
+        
+        setJMenuBar(jMenuBar1);
+        
+        // Прорисовка изображения.
+        add(new JComponent() {
+            public void paintComponent(Graphics g) {
+                if (image != null) {
+                    int Width;
+                    int Height;
+                    int w = this.getWidth();
+                    int h = this.getHeight();
+                    int wi = image.getWidth();
+                    int hi = image.getHeight();
+                    double k;
+
+                    k = ((double) w)/wi; 
+                    if (hi*k > h) 
+                        k =((double) h)/hi;
+                    Height = (int)(hi*k);
+                    Width = (int)(wi*k);
+                    
+                    int gapH = (h - Height)/2;
+                    int gapW = (w - Width)/2;
+                    
+                    g.drawImage(image, gapW, gapH, Width, Height, null);
+                }
+            }
+        });
+        
     }
 
     /**
@@ -27,7 +127,64 @@ public class NewJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        FileChooser = new javax.swing.JFileChooser();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        file = new javax.swing.JMenu();
+        Open = new javax.swing.JMenuItem();
+        Clear = new javax.swing.JMenuItem();
+        Save = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        Exit = new javax.swing.JMenuItem();
+
+        FileChooser.setDialogTitle("Мой открытый диалог");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(300, 300));
+        setName("frame1"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(423, 310));
+
+        file.setText("Файл");
+
+        Open.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        Open.setText("Открыть");
+        Open.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OpenActionPerformed(evt);
+            }
+        });
+        file.add(Open);
+
+        Clear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        Clear.setText("Очистить");
+        Clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClearActionPerformed(evt);
+            }
+        });
+        file.add(Clear);
+
+        Save.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        Save.setText("Сохранить");
+        Save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveActionPerformed(evt);
+            }
+        });
+        file.add(Save);
+        file.add(jSeparator1);
+
+        Exit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
+        Exit.setText("Выход");
+        Exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitActionPerformed(evt);
+            }
+        });
+        file.add(Exit);
+
+        jMenuBar1.add(file);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -37,11 +194,56 @@ public class NewJFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 269, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void OpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpenActionPerformed
+        JFileChooser jfc = new JFileChooser("C:\\Users\\a_v_k\\Desktop");
+        String[] extensions = ImageIO.getReaderFileSuffixes();
+        jfc.setFileFilter(new FileNameExtensionFilter("Image files", extensions));
+        if (jfc.showOpenDialog(this) != JFileChooser.APPROVE_OPTION)  return;
+        try
+        {
+            Image img = ImageIO.read(jfc.getSelectedFile());
+            image = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_RGB);
+            image.getGraphics().drawImage(img, 0, 0, null);
+        }
+        catch (IOException e)
+        {
+            JOptionPane.showMessageDialog(this, e);
+        }
+        repaint();
+    }//GEN-LAST:event_OpenActionPerformed
+
+    private void ClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearActionPerformed
+        image = null;
+        repaint();
+    }//GEN-LAST:event_ClearActionPerformed
+
+    private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
+        JFileChooser chooser = new JFileChooser("C:\\Users\\a_v_k\\Desktop");
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG Images", "jpg");
+        chooser.setFileFilter(filter);
+        int returnVal = chooser.showSaveDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            try {
+                ImageIO.write(image,"jpg", chooser.getSelectedFile());
+                JOptionPane.showMessageDialog(this, "Файл '" + chooser.getSelectedFile() + " сохранен");
+            } catch (IOException ex) {
+                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            System.out.println("File access cancelled by user.");
+        }
+    }//GEN-LAST:event_SaveActionPerformed
+
+    private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_ExitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +281,13 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Clear;
+    private javax.swing.JMenuItem Exit;
+    private javax.swing.JFileChooser FileChooser;
+    private javax.swing.JMenuItem Open;
+    private javax.swing.JMenuItem Save;
+    private javax.swing.JMenu file;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }

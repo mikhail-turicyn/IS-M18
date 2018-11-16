@@ -3,9 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package anaglyph3d;
+package photoeditor;
 
-public class Anaglyph3D {
+/**
+ *
+ * @author Alexander
+ */
+public class PhotoEditor {
 
     /**
      * @param args the command line arguments
