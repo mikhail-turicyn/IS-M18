@@ -105,7 +105,25 @@ public class NewJFrame extends javax.swing.JFrame {
 
         edit.setText("Редактировать");
 
-//фильтры
+        
+        blur.setText("Размытость");
+        blur.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                blurActionPerformed(evt);
+            }
+        });
+        edit.add(blur);
+
+        sharpen.setText("Резкость");
+        sharpen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sharpenActionPerformed(evt);
+            }
+        });
+        edit.add(sharpen);
+
+        
+
 
         jMenuBar1.add(edit);
 
