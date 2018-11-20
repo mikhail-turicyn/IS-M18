@@ -122,6 +122,22 @@ public class NewJFrame extends javax.swing.JFrame {
         });
         edit.add(sharpen);
 
+        brighter.setText("Ярче");
+        brighter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                brighterActionPerformed(evt);
+            }
+        });
+        edit.add(brighter);
+
+        darker.setText("Темнее");
+        darker.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                darkerActionPerformed(evt);
+            }
+        });
+        edit.add(darker);
+
         
 
 
