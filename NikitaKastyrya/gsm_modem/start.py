@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import gsm_modem as GSM_M
 
-
+#запуск программы
 if __name__ == '__main__':
     config = {}
     exec(open(("config.py"), encoding='utf8').read(), config)
