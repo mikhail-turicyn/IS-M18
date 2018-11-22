@@ -138,7 +138,29 @@ public class NewJFrame extends javax.swing.JFrame {
         });
         edit.add(darker);
 
-        
+        edgeDetect.setText("Обнаружение края");
+        edgeDetect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edgeDetectActionPerformed(evt);
+            }
+        });
+        edit.add(edgeDetect);
+
+        negative.setText("Негатив");
+        negative.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                negativeActionPerformed(evt);
+            }
+        });
+        edit.add(negative);
+
+        grayscale.setText("Оттенки серого");
+        grayscale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                grayscaleActionPerformed(evt);
+            }
+        });
+        edit.add(grayscale);
 
 
         jMenuBar1.add(edit);
