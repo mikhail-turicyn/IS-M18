@@ -5,15 +5,15 @@ package ru.vladigeras.visualization;
  */
 public class Client {
 	public static void main(String[] args) {
-		var demoJFreeChartBarChart = new JFreeChartExample("Bar Chart");
+		var demoJFreeChartBarChart = new JFreeBarChartExample("Bar Chart");
 		demoJFreeChartBarChart.pack();
 		demoJFreeChartBarChart.setVisible(true);
 
-		var demoJFreeChartPieChart = new JFreeChartExample("Pie Chart");
+		var demoJFreeChartPieChart = new JFreePieChartExample("Pie Chart");
 		demoJFreeChartPieChart.pack();
 		demoJFreeChartPieChart.setVisible(true);
 
-		var demoJFreeChartLineChart = new JFreeChartExample("Line Chart");
+		var demoJFreeChartLineChart = new JFreeLineChartExample("Line Chart");
 		demoJFreeChartLineChart.pack();
 		demoJFreeChartLineChart.setVisible(true);
 	}
