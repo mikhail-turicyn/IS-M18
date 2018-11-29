@@ -8,5 +8,9 @@ public class Client {
 		var demoJFreeChartBarChart = new JFreeChartExample("Bar Chart");
 		demoJFreeChartBarChart.pack();
 		demoJFreeChartBarChart.setVisible(true);
+
+		var demoJFreeChartPieChart = new JFreeChartExample("Pie Chart");
+		demoJFreeChartPieChart.pack();
+		demoJFreeChartPieChart.setVisible(true);
 	}
 }

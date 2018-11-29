@@ -11,6 +11,9 @@ import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.ui.ApplicationFrame;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.Dataset;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
 
 import java.awt.*;
 
@@ -22,8 +25,17 @@ public class JFreeChartExample extends ApplicationFrame {
 	public JFreeChartExample(String title) {
 		super(title);
 
-		var dataset = createDataset();
-		var chart = createChart(dataset);
+		Dataset dataset = null;
+		JFreeChart chart = null;
+
+		if (title.toLowerCase().contains("bar")) {
+			dataset = createCategoryDataset();
+			chart = createBarChart((CategoryDataset) dataset);
+
+		} else if (title.toLowerCase().contains("pie")) {
+			dataset = createPieDataset();
+			chart = createPieChart((PieDataset) dataset);
+		}
 
 		var chartPanel = new ChartPanel(chart, false);
 		chartPanel.setBackground(null);
@@ -33,7 +45,7 @@ public class JFreeChartExample extends ApplicationFrame {
 		setContentPane(chartPanel);
 	}
 
-	private static CategoryDataset createDataset() {
+	private static CategoryDataset createCategoryDataset() {
 		var dataset = new DefaultCategoryDataset();
 		dataset.addValue(66.54, "Валюта", "Доллар");
 		dataset.addValue(75.59, "Валюта", "Евро");
@@ -42,7 +54,15 @@ public class JFreeChartExample extends ApplicationFrame {
 		return dataset;
 	}
 
-	private static JFreeChart createChart(CategoryDataset dataset) {
+	private static PieDataset createPieDataset() {
+		var dataset = new DefaultPieDataset();
+		dataset.setValue("Windows 7", 81);
+		dataset.setValue("MacOS", 5);
+		dataset.setValue("Linux", 14);
+		return dataset;
+	}
+
+	private static JFreeChart createBarChart(CategoryDataset dataset) {
 		var barChart = ChartFactory.createBarChart(
 				"Курс валют к рублю",
 				null,
@@ -61,6 +81,12 @@ public class JFreeChartExample extends ApplicationFrame {
 		barChart.getLegend().setFrame(BlockBorder.NONE);
 
 		return barChart;
+	}
+
+	private static JFreeChart createPieChart(PieDataset dataset) {
+		return ChartFactory.createPieChart(
+				"Использование операционных систем",
+				dataset);
 	}
 }
 
