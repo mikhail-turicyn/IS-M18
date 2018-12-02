@@ -21,7 +21,7 @@ public class ImagePanel extends javax.swing.JPanel {
     private Image image;
 
     public ImagePanel(URL imageURL) {
-        image = Toolkit.getDefaultToolkit().createImage(imageURL);
+        image = Toolkit.getDefaultToolkit().createImage("F:\\cat.jpg");
         // create MediaTracker for image
         MediaTracker mediaTracker = new MediaTracker(this);
         mediaTracker.addImage(image, 0);
