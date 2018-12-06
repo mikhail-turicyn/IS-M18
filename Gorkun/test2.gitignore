@@ -1,8 +1,8 @@
 # игнорировать все  файлы в указанных каталогах
-/test/*
-/build/*
-/dist/*
-/nbproject/*
+test/*
+build/*
+dist/*
+nbproject/*
 # игнорировать все  файлы xml и mf в каталоге 
-/*.xml
-/*.mf
+*.xml
+*.mf
