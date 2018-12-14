@@ -1,0 +1,90 @@
+* commit 0015ecf2c1770906fe598a7bd46643b5ebf291db
+| Merge: 2ce060c af42eca
+| Author: CDIY <connect@obninsk.ru>
+| Date:   Wed May 17 02:45:52 2017 +0300
+| 
+|     Merge remote-tracking branch 'origin/master'
+| 
+* commit 2ce060c07332ed6f66e69c2e82b23ec5891fab67
+  Merge: 786e661 0c2b6de
+  Author: CDIY <connect@obninsk.ru>
+  Date:   Wed May 17 02:44:36 2017 +0300
+  
+      Merge branch 'master' into Back_mntn
+  
+* commit a9c4a56645e8257cb30ba090f72e5cb1f998451f
+  Merge: 44cc33d 56238ee
+  Author: CDIY <connect@obninsk.ru>
+  Date:   Wed May 17 01:46:36 2017 +0300
+  
+      Merge branch 'master' into Background
+  
+* commit 2652765adf8b970e3512c23e9780093a73531d97
+  Merge: 14694f6 612d395
+  Author: world61 <world61@192.168.0.101>
+  Date:   Tue May 16 18:46:06 2017 +0300
+  
+      Merge origin/hits into hits
+  
+* commit d10653948923f49f46c04df796f142f76e01bcc0
+  Merge: 45c4dfb bb9e43a
+  Author: CDIY <connect@obninsk.ru>
+  Date:   Tue May 16 02:35:39 2017 +0300
+  
+      Merge branch 'master' into Screens
+  
+* commit 2ff44929ced0eb570c5b0778f123fe89be285356
+  Merge: f144694 e9429df
+  Author: CDIY <connect@obninsk.ru>
+  Date:   Tue May 16 02:14:28 2017 +0300
+  
+      Merge branch 'master' into Screens
+  
+* commit 4c732b72986a4c29d988d92e61d93549db7b9200
+  Merge: fde60b8 4168aa7
+  Author: CDIY <connect@obninsk.ru>
+  Date:   Mon May 15 22:41:09 2017 +0300
+  
+      Merge branch 'master' into Screens
+      
+      # Conflicts:
+      #       core/src/edu/isb14/game/Background.java
+      #       core/src/edu/isb14/game/GameScreen.java
+  
+* commit c399d3dddf542d8e0067a7ed8b6b07123b8db6f8
+  Merge: a6a5422 7153768
+  Author: CDIY <connect@obninsk.ru>
+  Date:   Mon May 15 21:42:03 2017 +0300
+  
+      Merge remote-tracking branch 'origin/master'
+      
+      # Conflicts:
+      #       core/src/edu/isb14/game/GameScreen.java
+  
+* commit 8c7898564310478fc6c8abf3b3e7258884c07d70
+  Merge: 63e1ddc 3f39f8f
+  Author: CDIY <connect@obninsk.ru>
+  Date:   Mon May 15 19:50:20 2017 +0300
+  
+      Merge branch 'master' into Screens
+  
+* commit 8817591e3d6c390cc25600580f0a9456c4901ccc
+  Merge: 4540d55 45a8349
+  Author: CDIY <connect@obninsk.ru>
+  Date:   Tue Apr 11 12:52:44 2017 +0300
+  
+      Merge branch 'unit'
+  
+* commit b08a90024bbb69e619033dd0f2ae3ea2541d015a
+| Merge: 24f66ef f8ec693
+| Author: CDIY <connect@obninsk.ru>
+| Date:   Fri Apr 7 11:18:13 2017 +0300
+| 
+|     Merge branch 'master' of https://github.com/ConnectDIY/SUNs-game into unit
+| 
+* commit 24f66eff14cd78540765be37311d0c9979470ec2
+  Merge: eb24627 f261e00
+  Author: CDIY <connect@obninsk.ru>
+  Date:   Fri Apr 7 11:16:19 2017 +0300
+  
+      Merge branch 'master' of https://github.com/ConnectDIY/SUNs-game into unit
