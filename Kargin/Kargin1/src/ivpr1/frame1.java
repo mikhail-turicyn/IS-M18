@@ -29,7 +29,7 @@ public class frame1 extends javax.swing.JFrame {
     private void Licer1() {
         try{
     Class.forName("org.sqlite.JDBC");
-    Connection c = DriverManager.getConnection("jdbc:sqlite:G://TT.db");
+    Connection c = DriverManager.getConnection("jdbc:sqlite:TT.db");
     Statement s = c.createStatement();
     String querry = "select Направленность from Вид_специальности";
     ResultSet rs = s.executeQuery(querry);
